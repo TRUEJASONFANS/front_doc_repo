@@ -1,3 +1,4 @@
+# Home
 ## IDE
 ### vscode
 1. native support jsx and format
@@ -20,7 +21,8 @@ the javascript runtime
 ### Umi[https://umijs.org/zh/guide/]
 
 ### Neutrino 
-    把 webpack 的强大功能和简单预设结合在一起。并且包括了 React 应用和 React 组件的预设。
+    把 webpack 的强大功能和简单预设结合在一起。并且包括了 React 应用和 React 组件的预设。(脚手架库)
+
 ### nwb
     特别适合于将 React 组件发布到 npm。它也能用于创造 React 应用
 ### Razzle
@@ -30,6 +32,10 @@ the javascript runtime
 ### eslint
 
 ## Test framework
+1. Jest
+2. Karma
+3. Mocha
+
 ### Jest framework("Junit" in javascript)
 
 #### how to test react app
@@ -47,6 +53,13 @@ the javascript runtime
 2. yarn
 
 ### 打包器
+#### 模块规范
+1. CommomJS
+2. AMD
+3. UMD
+简而言之就是从同步到异步再到统一
+[详细参见](https://75team.com/post/%E8%AF%91%E7%A5%9E%E9%A9%AC%E6%98%AFamd-commonjs-umd.html)
+
 #### webpack
 #### parcel
     是一个快速的、零配置的网页应用打包器，并且可以搭配 React 一起工作   
