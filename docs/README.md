@@ -69,4 +69,4 @@ the javascript runtime
     browserify will recursively analyze all the require() calls in your app in order to build a bundle you can serve up to the browser in a single <script> tag.
 ### js编译器
 #### babel
-![流程图](https://www.processon.com/view/link/5cf7e4b3e4b06e3f4fae1e4c)
+![流程图](https://user-images.githubusercontent.com/5670289/59024459-85997c80-8884-11e9-8b6a-532ea61ca3fd.jpg)
