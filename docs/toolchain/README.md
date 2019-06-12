@@ -1,4 +1,63 @@
-# 工具链
+# Home
+## IDE
+### vscode
+1. native support jsx and format
+2. eslint plugin to check 
+
+## Node
+the javascript runtime
+
+## React
+### JSX = JS+HTML
+
+
+## React Framework
+
+### Next 
+   1. 构建服务端渲染的网站
+### Umi[https://umijs.org/zh/guide/]
+
+### Razzle
+    是一个无需配置的服务端渲染框架，但它提供了比 Next.js 更多的灵活性
+
+## Quality tool
+### eslint
+
+## Test framework
+1. Jest
+``` 
+// 测试一个function, 文件名必须以*.test.(j|t)s 结尾
+const sum = function (a, b) {
+    return a + b;
+  };
+  
+  test('adds 1 + 2 to equal 3', () => {
+    expect(sum(1, 2)).toBe(3);
+  });
+```
+```
+// TestDemo.tsx
+
+export default () => {
+    return <div>test</div>;
+};
+```
+```
+import 'jest';
+import { mount } from 'enzyme';
+import TestDemo from '../component/TestDemo'
+
+test('TestDemo', () => {
+  const wrapper = mount(<TestDemo />);
+  expect(wrapper.find('div').text()).toBe('test');
+});
+
+```
+2. Karma
+3. Mocha
+
+## 工具链
+
 一组 JavaScript 构建工具链通常由这些组成：
 1. 一个 package 管理器，比如 Yarn 或 npm。它能让你充分利用庞大的第三方 package 的生态系统，并且轻松地安装或更新它们。
 2. 一个打包器，比如 webpack 或 Parcel。它能让你编写模块化代码，并将它们组合在一起成为小的 package，以优化加载时间。
@@ -34,17 +93,3 @@
 
 ## SPA 前端开发流程图
 ![流程图](https://user-images.githubusercontent.com/5670289/59024459-85997c80-8884-11e9-8b6a-532ea61ca3fd.jpg)
-
-## 作用
-把源代码转换成发布到线上的可执行 JavaScrip、CSS、HTML 代码
-
-## 职责
-代码转换：TypeScript 编译成 JavaScript、SCSS 编译成 CSS 等。
-文件优化：压缩 JavaScript、CSS、HTML 代码，压缩合并图片等。
-代码分割：提取多个页面的公共代码、提取首屏不需要执行部分的代码让其异步加载。
-模块合并：在采用模块化的项目里会有很多个模块和文件，需要构建功能把模块分类合并成一个文件。
-自动刷新：监听本地源代码的变化，自动重新构建、刷新浏览器。
-代码校验：在代码被提交到仓库前需要校验代码是否符合规范，以及单元测试是否通过。
-自动发布：更新完代码后，自动构建出线上发布代码并传输给发布系统。
-
-
