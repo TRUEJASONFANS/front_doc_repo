@@ -4,19 +4,88 @@
 2. 一个打包器，比如 webpack 或 Parcel。它能让你编写模块化代码，并将它们组合在一起成为小的 package，以优化加载时间。
 3. 一个编译器，例如 Babel。它能让你编写的新版本 JavaScript 代码，在旧版浏览器中依然能够工作。
 
+## SPA 前端开发流程图
+![流程图](https://user-images.githubusercontent.com/5670289/59024459-85997c80-8884-11e9-8b6a-532ea61ca3fd.jpg)
+
+
 ### 包管理器
 1. npm
 2. yarn
 
+npm 和 yarn 相当于java世界中的maven,  他们是 js 开发的模块管理器,在js的世界中,依赖的最小单元是一个模块。
+
+#### 本地依赖与全局依赖
+添加本地依赖
+```
+npm install antd //安装antd依赖
+yarn add antd //安装antd依赖
+```
+添加全局依赖
+```
+npm install -g 
+```
+通过上面的命令行（带-g修饰符）安装某个包，就叫全局安装。通常全局包安装在node目录下的node_modules文件夹。可以通过执行下面几条命令查看node、npm的安装目录和全局包的安装目录。
+全局安装的包可提供直接执行的命令，他是可以独立运行的一个应用程序
+```
+which node   // 查看node的安装目录
+which npm   // 查看npm的安装目录
+npm root -g // 查看全局包的安装目录
+npm list -g --depth 0 //查看全局安装过的包
+````
+
+#### 开发依赖与生产依赖
+
+保存到开发依赖(devDependencies): npm install pageName --save-dev
+保存到生产依赖(dependencies): npm install pageName --save
+
+```
+添加dev依赖
+npm i pageName --save-dev
+yarn add -D pageName
+```
+```
+添加生产依赖
+npm i pageName
+yarn add pageName
+```
+devDependencies只会在开发环境下使用，生产环境不会被打入包内；而dependencies不仅在开发环境中要使用，生产环境也需要使用到。根据以上规则，我们就很容易区分哪些插件是用--save-dev模式安装，哪些用--save模式安装。
+
 ### 打包器
 #### 模块规范
-1. CommomJS
-2. AMD
-3. UMD
+1. CommomJS (同步)
+```
+a.js
+exports.add = function(a,b){
+	return a+b;
+}
+
+b.js 
+var add = require('a.js').add;
+console.log(add(1,2))//3
+```
+2. AMD (异步)
+```
+define(['myModule', 'myOtherModule'],function(myModule, myOtherModule) {
+	console.log(myModule.hello());
+});
+```
+3. UMD (统一)
 简而言之就是从同步到异步再到统一
 [详细参见](https://75team.com/post/%E8%AF%91%E7%A5%9E%E9%A9%AC%E6%98%AFamd-commonjs-umd.html)
 
+| 环境        | 规范           | 实现  |
+| ------------- |:-------------:| -----:|
+| node      | CommonJS | nodejs 模块 |
+| 浏览器     | CommonJS      |   Browserify |
+| 浏览器 | AMD |   RequireJS |
+| 浏览器 | UMD |   👆两者 |
+
+4. ES module (规范) (我们用这种就行了)
+ECMA缺乏官方的模块规范才出来的，既然对模块化的需求这么旺盛，官方在ES2015(ES6)里也就提出了官方的模块化方案，主要使用import和export
+还没有被浏览器实现，大部分项目已通过 babel 或 typescript 提前体验。
+
 #### webpack
+
 
 1. Neutrino 
     把 webpack 的强大功能和简单预设结合在一起。并且包括了 React 应用和 React 组件的预设。(脚手架库)
@@ -32,19 +101,10 @@
 ### js编译器
 #### babel
 
-## SPA 前端开发流程图
-![流程图](https://user-images.githubusercontent.com/5670289/59024459-85997c80-8884-11e9-8b6a-532ea61ca3fd.jpg)
 
 ## 作用
 把源代码转换成发布到线上的可执行 JavaScrip、CSS、HTML 代码
 
-## 职责
-代码转换：TypeScript 编译成 JavaScript、SCSS 编译成 CSS 等。
-文件优化：压缩 JavaScript、CSS、HTML 代码，压缩合并图片等。
-代码分割：提取多个页面的公共代码、提取首屏不需要执行部分的代码让其异步加载。
-模块合并：在采用模块化的项目里会有很多个模块和文件，需要构建功能把模块分类合并成一个文件。
-自动刷新：监听本地源代码的变化，自动重新构建、刷新浏览器。
-代码校验：在代码被提交到仓库前需要校验代码是否符合规范，以及单元测试是否通过。
-自动发布：更新完代码后，自动构建出线上发布代码并传输给发布系统。
+
 
 
