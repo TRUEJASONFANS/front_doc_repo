@@ -43,3 +43,8 @@ npm i pageName
 yarn add pageName
 ```
 devDependencies只会在开发环境下使用，生产环境不会被打入包内；而dependencies不仅在开发环境中要使用，生产环境也需要使用到。根据以上规则，我们就很容易区分哪些插件是用--save-dev模式安装，哪些用--save模式安装。
+
+## yarn vs npm
+1. yarn.lock 锁定版本 
+2. yarn 并行安装 
+3. yarn 拥有更清晰的输出

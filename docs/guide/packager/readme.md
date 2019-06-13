@@ -1,4 +1,48 @@
+---
+prev: false
+next: ./others
+---
+
 # 打包器
+
+## 模块规范
+
+1. CommomJS (同步)
+```
+a.js
+exports.add = function(a,b){
+	return a+b;
+}
+
+b.js 
+var add = require('a.js').add;
+console.log(add(1,2))//3
+```
+2. AMD (异步)
+```
+define(['myModule', 'myOtherModule'],function(myModule, myOtherModule) {
+	console.log(myModule.hello());
+});
+```
+3. UMD (统一)
+简而言之就是从同步到异步再到统一
+[详细参见](https://75team.com/post/%E8%AF%91%E7%A5%9E%E9%A9%AC%E6%98%AFamd-commonjs-umd.html)
+
+| 环境        | 规范           | 实现  |
+| ------------- |:-------------:| -----:|
+| node      | CommonJS | nodejs 模块 |
+| 浏览器     | CommonJS      |   Browserify |
+| 浏览器 | AMD |   RequireJS |
+| 浏览器 | UMD |   👆两者 |
+
+4. ES module (规范) (我们用这种就行了)
+上面的模块化解决方案都是缺乏官方的模块规范才出来的，既然对模块化的需求这么旺盛，官方在ES2015(ES6)里也就提出了官方的模块化方案，主要使用import和export
+还没有被浏览器实现，大部分项目已通过 babel 或 typescript 提前体验。
+示例
+```javascript
+import { export1 , export2 } from "module-name";
+```
+
 ## webpack
 Webpack 是一个打包模块化 JavaScript 的工具，在 Webpack 里一切文件皆模块，通过 Loader 转换文件，通过 Plugin 注入钩子，最后输出由多个模块组合成的文件。Webpack 专注于构建模块化项目。
 [图例](http://webpack.wuhaolin.cn/1%E5%85%A5%E9%97%A8/img/1-2webpack.png)

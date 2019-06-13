@@ -20,11 +20,11 @@ module.exports = {
           children: [
             "",
             "packageManager",
-            "webpack",
-            "others",
+            "packager/",
+            "packager/others",
           ]
         }
-      ]
+      ],
     }
   }
 };
