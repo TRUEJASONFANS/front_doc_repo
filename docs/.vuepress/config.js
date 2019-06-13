@@ -19,8 +19,9 @@ module.exports = {
           collapsable: false,
           children: [
             "",
+            "packageManager",
             "webpack",
-            "parcel",
+            "others",
           ]
         }
       ]
