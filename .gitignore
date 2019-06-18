@@ -60,3 +60,9 @@ typings/
 # next.js build output
 .next
 .vscode/settings.json
+
+public
+
+.vuepress/dist
+
+docs/.vuepress/dist/

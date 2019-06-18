@@ -1,10 +1,10 @@
 {
-  "dependencies": {
-    "vuepress-theme-yubisaki": "^3.1.0"
-  },
   "scripts": {
-    "dev": "vuepress dev ./docs",
+    "dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "start":"npm run dev"
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "vuepress": "^1.0.0-rc.1"
   }
 }

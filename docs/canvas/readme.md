@@ -14,3 +14,7 @@ anvas的API提供了两个名叫save()和restore()的方法，用于保存及恢
 2. 当前剪贴区域
 3. 图形上下文对象（CanvasRenderingContext2D）的当前属性值
 
+## 坐标变换
+1.平移 translate
+2.旋转 rotate
+3.scale 缩放坐标体系
