@@ -1,6 +1,7 @@
 module.exports = {
   title: "前端知识图谱",
   description: "front knowledge collecting repo.",
+  port:"8080",
   themeConfig: {
     repo: "TRUEJASONFANS/front_doc_repo",
     lastUpdated: "Last Updated",
@@ -23,6 +24,7 @@ module.exports = {
             "packager/",
             "compiler",
             "packager/others",
+            "unit_test"
           ]
         }
       ],
