@@ -1,8 +1,3 @@
----
-prev: false
-next: ./packageManager/
----
-
 # 工具链
 一组 JavaScript 构建工具链通常由这些组成：
 1. 一个 package 管理器，比如 Yarn 或 npm。它能让你充分利用庞大的第三方 package 的生态系统，并且轻松地安装或更新它们。

@@ -21,6 +21,7 @@ module.exports = {
             "",
             "packageManager",
             "packager/",
+            "compiler",
             "packager/others",
           ]
         }
