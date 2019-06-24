@@ -15,6 +15,8 @@ yarn add antd //安装antd依赖
 添加全局依赖
 ```
 npm install -g 
+yarn global add 
+
 ```
 
 通过上面的命令行（带-g修饰符）安装某个包，就叫全局安装。通常全局包安装在node目录下的node_modules文件夹。可以通过执行下面几条命令查看node、npm的安装目录和全局包的安装目录。

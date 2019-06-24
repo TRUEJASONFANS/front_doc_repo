@@ -1,7 +1,7 @@
 # Unit Test
 
 ## jest
-
+Jest是由Facebook开发并维护的一套js的单元测试框架
 ### Getting Started
 
 ```shell

@@ -18,3 +18,14 @@ anvas的API提供了两个名叫save()和restore()的方法，用于保存及恢
 1.平移 translate
 2.旋转 rotate
 3.scale 缩放坐标体系
+
+
+## 动画
+1. requestAnimationFrame 自行决定最佳的帧速率
+```javascript
+function animate(time) {
+    //Update and draw animation objects
+    requestAnimationFrame(animate)// sustatin the animation
+}
+requestAniamtionFrame
+```
