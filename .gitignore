@@ -61,8 +61,6 @@ typings/
 .next
 .vscode/settings.json
 
-public
-
 .vuepress/dist
 
 docs/.vuepress/dist/
