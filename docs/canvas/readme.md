@@ -1,8 +1,20 @@
 # Canvas
+![canvas](./canvas-opengl-webgl-css-shaders-glsl.png)
 
-## Canvas 坐标系
+Canvas是HTML5新增的组件，它就像一块幕布，可以用JavaScript在上面绘制各种图表、动画等。
+没有Canvas的年代，绘图只能借助Flash插件实现，页面不得不用JavaScript和Flash进行交互。有了Canvas，我们就再也不需要Flash了，直接使用JavaScript完成绘制。
+一个Canvas定义了一个指定尺寸的矩形框，在这个范围内我们可以随意绘制。
+
+## Canvas 坐标
 原点位于左上角, x 轴横向向右,  Y 轴竖向向下为正方向.
-
+<ClientOnly>
+    <canvas-example/>
+</ClientOnly>
+```javascript
+  <section>
+    <canvas id="canvas1" width="1000" height="440">Canvas not supported</canvas>
+  </section>
+```
 ## 贝塞尔曲线
 1. 平方贝塞尔曲线: 由两个锚点和一个控制点组成quadraticCruveTo(double cpx, double cpy, double x, double y)
 2. 三次方贝塞尔曲线：创建一条代表三次方贝塞尔曲线的路径. bezierCurveTo(double cpx, double cpy, double cp2x, double cp2y, double x, double y)
