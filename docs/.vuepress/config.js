@@ -24,7 +24,8 @@ module.exports = {
             "packager/",
             "compiler",
             "packager/others",
-            "unit_test"
+            "unit_test",
+            "canvas_doc/"
           ]
         }
       ],
