@@ -1,5 +1,6 @@
 <template>
   <section>
+    <button v-on:click="onPlay">{{text}}</button>
     <canvas id="canvas1" width="1000" height="440">Canvas not supported</canvas>
   </section>
 </template>
@@ -8,25 +9,35 @@
 module.exports = {
   data: function() {
     return {
-      greeting: "Hello"
+      play: false,
+      text: "播放"
     };
   },
-
   methods: {
+    onPlay: function() {
+      this.play = !this.play;
+      if (this.play) {
+        this.text = "停止";
+      } else {
+        this.text = "播放";
+      }
+    },
     calculateFps: function(now) {
-      console.log("ms:",now - lastTime);
       var fps = 1000 / (now - lastTime);
       lastTime = now;
-      return fps; 
+      return fps;
     },
     animatation: function(now) {
       if (now === undefined) {
         now = +new Date();
       }
       fps = this.calculateFps(now);
-      this.erase();
-      this.draw();
-      console.log("animate run: " + fps);
+      if (this.play) {
+        this.erase();
+        this.draw();
+        //console.log("animate run: " + fps);
+      }
+      //console.log(this.play);
       requestAnimationFrame(this.animatation);
     },
     erase: function() {
@@ -37,7 +48,6 @@ module.exports = {
     draw: function() {
       let canvas = document.getElementById("canvas1");
       context = canvas.getContext("2d");
-      console.log("draw method is invoked.");
       context.save();
 
       skyOffset = skyOffset < canvas.width ? skyOffset + SKY_VELOCITY / fps : 0;
