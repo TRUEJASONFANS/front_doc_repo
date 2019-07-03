@@ -6,7 +6,7 @@ next: ./others
 ## 什么叫模块化？
 远古时代， 当我们程序还远远未达到工程的量级， 我们程序可能就是一个文件，甚至是几行code。
 比如一个文件的实现的[俄罗斯方块](http://localhost:8080/blocks.html)。
-模块化的概念就是用模块化方式去管理，重复利用，优化代码码,从而达到工程的概念。 在js语言被创造出来的初期，它仅仅用于操作页面的一些小脚本工作.
+模块化的概念就是用模块化方式去管理，重复利用，优化代码块,从而达到工程的概念。 在js语言被创造出来的初期，它仅仅用于操作页面的一些小脚本工作.
 完全无法胜任复杂的软件工程。随着Web页面越来越来复杂化，js所承担的工作越来越大，所以对js的代码实现模块化管理需求越来越重要和紧急，于是出现需要
 模块化的标准
 
@@ -61,6 +61,21 @@ import { export1 , export2 } from "module-name";
 注意：现在主流浏览器都没有原生支持es module. 我们需要通过babel转译我们的代码才能达到此目的。即我们用es规范实现js代码，最终转译打包成浏览器支持运行的js代码。
 
 ## webpack (万物皆模块)
+
+### 什么是模块？
+*在模块化编程中，开发者将程序分解成离散功能块(discrete chunks of functionality)，并称之为模块。*
+webpack 通过 loader 可以支持各种语言和预处理器编写模块。loader 描述了 webpack 如何处理 非 JavaScript(non-JavaScript) _模块_，并且在 bundle 中引入这些依赖。 webpack 社区已经为各种流行语言和语言处理器构建了 loader，包括：
+
+* CoffeeScript
+* TypeScript
+* ESNext (Babel)
+* Sass
+* Less
+* Stylus
+
+![webpack模块](https://webpack.github.io/assets/what-is-webpack.png)
+
+
 Webpack 是一个打包模块化 JavaScript 的工具，在 Webpack 里一切文件皆模块，通过 Loader 转换文件，通过 Plugin 注入钩子，最后输出由多个模块组合成的文件。Webpack 专注于构建模块化项目。
 [图例](http://webpack.wuhaolin.cn/1%E5%85%A5%E9%97%A8/img/1-2webpack.png)
 
@@ -101,7 +116,7 @@ npm install webpack webpack-cli --save-dev
 或者
 yarn add -D webpack webpack-cli
 ```
-添加webpack.config.js
+添加webpack.config.js 示例
 
 ```
 const path = require('path');
@@ -124,6 +139,67 @@ webpack --watch
 ```
 2. 使用 webpack-dev-server
 修改文件后，自动重新加载html页面
+webpack.config.js
+```
+  const path = require('path');
+  const HtmlWebpackPlugin = require('html-webpack-plugin');
+  const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-### 热加载
+  module.exports = {
+    entry: {
+      app: './src/index.js',
+      print: './src/print.js'
+    },
+    devtool: 'inline-source-map',
++   devServer: {
++     contentBase: './dist'
++   },
+    plugins: [
+      new CleanWebpackPlugin(['dist']),
+      new HtmlWebpackPlugin({
+        title: 'Development'
+      })
+    ],
+    output: {
+      filename: '[name].bundle.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  };
+```
+更新package.json
+```
+ {
+    "name": "development",
+    "version": "1.0.0",
+    "description": "",
+    "main": "webpack.config.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "watch": "webpack --watch",
++     "start": "webpack-dev-server --open",
+      "build": "webpack"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "clean-webpack-plugin": "^0.1.16",
+      "css-loader": "^0.28.4",
+      "csv-loader": "^2.1.1",
+      "file-loader": "^0.11.2",
+      "html-webpack-plugin": "^2.29.0",
+      "style-loader": "^0.18.2",
+      "webpack": "^3.0.0",
+      "xml-loader": "^1.2.1"
+    }
+  }
+
+```
+运行以下命令即可启动开发模式
+```
+yarn start
+```
+### 热加载（类似于java热加载技术）
 模块热替换(Hot Module Replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新各种模块，而无需进行完全刷新。本页面重点介绍实现，而概念页面提供了更多关于它的工作原理以及为什么它有用的细节。
+*HMR 不适用于生产环境，这意味着它应当只在开发环境使用*
+![](https://pic1.zhimg.com/v2-2ae68735d9eb4e4b6a877d843d520f6c_r.jpg)
