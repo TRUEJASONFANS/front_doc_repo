@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            background-repeat: no-repeat;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background: #ffffff;
+        }
+
+        /*HEADER*/
+        .header {
+            height: 25px;
+            background: #222;
+            color: #eee;
+            text-align: center;
+            font: 10px/25px Helvetica, Verdana, sans-serif;
+        }
+
+        .header a {
+            color: #999;
+        }
+
+        .hand {
+            margin: 50px;
+        }
+
+        /* For modern browsers */
+        .hand:before,
+        .hand:after {
+            content: "";
+            display: table;
+        }
+
+        .hand:after {
+            clear: both;
+        }
+
+        /* For IE 6/7 (trigger hasLayout) */
+        .hand {
+            zoom: 1;
+        }
+
+        .card {
+            border-radius: 10px;
+            margin: 0 auto;
+            width: 100px;
+            height: 140px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            font-weight: bold;
+            color: white;
+            transform: scale(1);
+            transition: transform 100ms ease-in-out;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            background: #149c37;
+        }
+
+        .card p {
+            text-align: center;
+            font: 100px/220px Georgia, serif;
+        }
+
+        .card:hover {
+            cursor: pointer;
+        }
+
+        .card-in-hand {
+            position: absolute;
+            left: 0;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .card-rig {
+            width: 100px;
+            text-align: center;
+        }
+
+        .card-wrapper {
+            position: relative;
+            width: 100px;
+            height: 140px;
+            z-index: 1;
+        }
+
+        .card-rig .perspective-wrapper {
+            perspective: 700px;
+            perspective-origin: 50% 50%;
+        }
+
+        .card-rig .animation-wrapper {
+            will-change: transform;
+        }
+
+        .card-in-hand .card-container {
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
+        }
+
+        .card-container {
+            width: 100px;
+            height: 140px;
+            border-radius: 10px;
+        }
+
+        .small-card-id {
+            position: absolute;
+            top: 3px;
+            left: 6px;
+            font-size: 20px;
+        }
+
+        .card-face .player-vote {
+            position: relative;
+            padding-top: 40px;
+            font-size: 45px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="card suitdiamonds">
+        <p>1</p>
+    </div> -->
+    <div class="card-rig card-in-hand" style="left: 20px;top: 20px;">
+        <div class="card-wrapper perspective-wrapper">
+            <div class="animation-wrapper" style="transform: matrix(1, 0, 0, 1, 0, 0);">
+                <div class="card-container rotate face-up card-green">
+                    <div class="card card-back"></div>
+                    <div class="card card-face">
+                        <div class="small-card-id">
+                            <span>1</span>
+                        </div>
+                        <div class="text-center player-vote">
+                            <span>1</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
