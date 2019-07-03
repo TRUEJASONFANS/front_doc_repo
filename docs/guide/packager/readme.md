@@ -93,3 +93,37 @@ webpack的插件用来提供额外的功能（通过在构建过程注入钩子�
 
 ### 实例
 [Love fish](https://github.com/TRUEJASONFANS/lovingFish)
+
+### 起步
+webpack4
+```
+npm install webpack webpack-cli --save-dev
+或者
+yarn add -D webpack webpack-cli
+```
+添加webpack.config.js
+
+```
+const path = require('path');
+
+module.exports = {
+  entry: 'index.js',//入口设置
+	devtool: 'inline-source-map',// 配置映射源码
+  output: {// 输出设定
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist')
+  }
+};
+
+```
+
+### 每次修改代码后需要重新build, 然后重新刷新html
+1. 使用观察模式
+```
+webpack --watch
+```
+2. 使用 webpack-dev-server
+修改文件后，自动重新加载html页面
+
+### 热加载
+模块热替换(Hot Module Replacement 或 HMR)是 webpack 提供的最有用的功能之一。它允许在运行时更新各种模块，而无需进行完全刷新。本页面重点介绍实现，而概念页面提供了更多关于它的工作原理以及为什么它有用的细节。
