@@ -113,6 +113,10 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
         }
 
+        .card-in-hand .card-container:hover {
+            transform: scale(1.2, 1.2);
+        }
+
         .card-container {
             width: 100px;
             height: 140px;
@@ -141,7 +145,7 @@
     <div class="card-rig card-in-hand" style="left: 20px;top: 20px;">
         <div class="card-wrapper perspective-wrapper">
             <div class="animation-wrapper" style="transform: matrix(1, 0, 0, 1, 0, 0);">
-                <div class="card-container rotate face-up card-green">
+                <div class="card-container rotate face-up card-green" onclick="changeStyle()" id="container">
                     <div class="card card-back"></div>
                     <div class="card card-face">
                         <div class="small-card-id">
@@ -157,6 +161,20 @@
 
         </div>
     </div>
+    <script type="text/javascript">
+        var flag = true;
+        function changeStyle() {
+            var a = document.getElementById("container");
+            if (flag) {
+                a.style = "transform: matrix3d(0.968846, -0.247665, 0, 0, 0.246399, 0.963893, 0.100983, 0, -0.0250101, -0.0978374, 0.994888, 0, 0, -126.512, 0, 1)";
+                flag = false;
+            }
+            else {
+                a.style = "transform: matrix(1, 0, 0, 1, 0, 0)";
+                flag = true;
+            }
+        }
+    </script>
 </body>
 
 </html>
