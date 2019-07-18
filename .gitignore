@@ -64,3 +64,6 @@ typings/
 .vuepress/dist
 
 docs/.vuepress/dist/
+
+# dist build
+public
