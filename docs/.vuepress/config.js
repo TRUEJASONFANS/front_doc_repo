@@ -3,7 +3,7 @@ module.exports = {
   description: "front knowledge collecting repo.",
   port:"8080",
   dest:"public",
-  base:"front_doc_repo",
+  base:"/front_doc_repo/",
   themeConfig: {
     repo: "TRUEJASONFANS/front_doc_repo",
     lastUpdated: "Last Updated",
