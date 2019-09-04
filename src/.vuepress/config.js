@@ -27,7 +27,8 @@ module.exports = {
             "compiler",
             "packager/others",
             "unit_test",
-            "canvas_doc/"
+            "canvas_doc/",
+            "css_doc/"
           ]
         }
       ],

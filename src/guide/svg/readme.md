@@ -71,7 +71,8 @@ SVG 是一种基于 XML 语法的图像格式，全称是可缩放矢量图（Sc
     <use href="#myCircle" x="0" y="0" />
     <use href="#myCircle" x="100" y="0" fill="blue" />
     <use href="#myCircle" x="200" y="0" fill="white" stroke="blue" />
-  </svg> 
+  </svg>
+  
 ```
 css 也可以修改svg中定义的class
 ```css
