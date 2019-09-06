@@ -28,3 +28,14 @@ strut “支柱”，幽灵盒子 是一个存在于每个“行框盒子”前�
 ## 设计原则
 1. 不破坏流的特性
 2. 
+
+
+## width：auto
+1. 外部尺寸 Extrinsic Sizing 宽度由外部元素决定 典型如块状元素， 默认100%宽度, margin/border/padding/content 内容区域自动分配水平空间的限制
+   1. 正常流宽度
+   2. 格式化宽度
+2. 内部尺寸 Intrinsic Sizing 宽度由内部元素决定
+   1. 包裹性
+   2. 自适应性->智能宽度
+3. 宽度width 是作用于content盒子上
+   1. css流体布局下的宽度分离原子, width独立占用一层标签，而padding,border,margin利用流动性在内部自适应呈现.
