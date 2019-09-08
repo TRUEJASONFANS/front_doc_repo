@@ -5,7 +5,8 @@ next: ./position
 # CSS世界
 
 ## 盒子模型
-[盒子模型](./box.md)
+
+[盒子模型](./box-doc.md)
 
 ## max-height& min-height
 
