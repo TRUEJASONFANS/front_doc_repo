@@ -69,3 +69,5 @@ img {
   margin-right:30px; //无效
 }
 ```
+## 内联元素高度之本line-height
+1. 内联的元素的高度由line-height确定
