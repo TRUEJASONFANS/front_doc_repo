@@ -3,10 +3,12 @@
 ## inline-box
 
 1. 内联盒子和匿名内联盒子
+
 ```html
 <p>这是一行普通文字，这里有个<em>em</em>标签</p>
+<!-- <em>内是内联盒子 -->
 ```
-<em>内是内联盒子
+
 这是一行。。这里这个是一个匿名内链盒子
 
 光秃秃的文字可能是内联盒子，也可能是块级盒子， 得看前后的标签是内联还是块级。
@@ -40,9 +42,41 @@ strut “支柱”，幽灵盒子 是一个存在于每个“行框盒子”前�
 3. 宽度width 是作用于content盒子上
    1. css流体布局下的宽度分离原子, width独立占用一层标签，而padding,border,margin利用流动性在内部自适应呈现.
 
+<<<<<<< HEAD:src/guide/css_doc/box.md
 ## 替换元素
 1. 替换元素的特性
    1. 内容的外观不受页面上的css的影响(样式表现在css作用域之外)
    2. 有自己的尺寸 
    3. 在很多css属性上有自己一套的表现规则。比如veritical-align
 
+=======
+## 盒尺寸四大家族
+### 替换元素与非替换元素的距离 content
+1. 只隔一个src属性
+2. 有无content属性
+### padding
+1. padding 与width 无关，除非设置box-sizing
+2. padding 百分比值 是基于宽度计算
+块状元素
+```css
+<!-- 正方形框 -->
+div {padding:%50;}
+<!-- 矩形框 -->
+div {padding: 25% 50%} 
+```
+### margin
+```html
+元素对应方向具有自动填充特性
+margin:auto
+```
+1. margin:auto 天生为左右对其而设计。(左右等分margin, 就像text-align:center一样),效果前提：
+2. 绝对定位的元素将会单独渲染，非定位方向margin 作用将会被忽略
+```css
+img {
+  top:10%; left:30%
+  margin-right:30px; //无效
+}
+```
+## 内联元素高度之本line-height
+1. 内联的元素的高度由line-height确定
+>>>>>>> a484e974f61adac4e00117015a2f0a002cfbc5fa:src/guide/css_doc/box-doc.md
