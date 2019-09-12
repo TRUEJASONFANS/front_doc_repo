@@ -42,15 +42,11 @@ strut “支柱”，幽灵盒子 是一个存在于每个“行框盒子”前�
 3. 宽度width 是作用于content盒子上
    1. css流体布局下的宽度分离原子, width独立占用一层标签，而padding,border,margin利用流动性在内部自适应呈现.
 
-<<<<<<< HEAD:src/guide/css_doc/box.md
-## 替换元素
-1. 替换元素的特性
+## 盒尺寸四大家族
+### 替换元素的特性
    1. 内容的外观不受页面上的css的影响(样式表现在css作用域之外)
    2. 有自己的尺寸 
    3. 在很多css属性上有自己一套的表现规则。比如veritical-align
-
-=======
-## 盒尺寸四大家族
 ### 替换元素与非替换元素的距离 content
 1. 只隔一个src属性
 2. 有无content属性
@@ -78,5 +74,24 @@ img {
 }
 ```
 ## 内联元素高度之本line-height
-1. 内联的元素的高度由line-height确定
->>>>>>> a484e974f61adac4e00117015a2f0a002cfbc5fa:src/guide/css_doc/box-doc.md
+1. 内联的元素的高度由line-height确定，如果还有替换元素，则决定最小高度
+2. 对于块级元素，line-height对起本身并没有任何作用，我们平时改变line-height,块级元素的高度跟着变化实际上是通过改变块级元素的内联级别元素的高度实现，定义其中行框盒子的最小高度
+## line-height的好朋友vertical-align
+1. 只能应用于内联元素
+2. 以及display位table-cell的元素
+3. 其百分比值是依据line-height计算得到
+```css
+.example {
+  float:left;
+  vertical-align: middle; /* 没有作用 */
+}
+```
+4. vertical-align: 
+   1. top 
+      1. 内联元素：元素底部和当前行框盒子的顶部对齐
+      2. table-cell 元素底部padding边缘和表格行的顶部对齐
+   2. bottom
+      1. 内联元素：元素底部和当前行框盒子的底部对齐
+      2. 2. table-cell 元素底部padding边缘和表格行的底部对齐
+   3. top/bottom看行框盒子
+   4. baseline/middle是和字符x打交道
