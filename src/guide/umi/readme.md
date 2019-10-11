@@ -30,3 +30,58 @@
 
 1. MPA（多页应用）
 2. 微前端
+
+## 设计理念
+React 的核心概念就是组件。UMI框架的主要功能，就是定义了一套编写和使用组件的规范
+![UMI前端代码层次]](https://gw.alipayobjects.com/zos/rmsportal/trbRYJugHYeODogmIgwi.png)
+上图中，左侧是服务端代码的层次结构，由 Controller、Service、Data Access 三层组成服务端系统：
+1. Controller 层负责与用户直接打交道，渲染页面、提供接口等，侧重于展示型逻辑。
+2. Service 层负责处理业务逻辑，供 Controller 层调用。
+3. Data Access 层顾名思义，负责与数据源对接，进行纯粹的数据读写，供 Service 层调用。
+上图的右侧是前端代码的结构，同样需要进行必要的分层：
+1. Page 负责与用户直接打交道：渲染页面、接受用户的操作输入，侧重于展示型交互性逻辑。
+2. Model 负责处理业务逻辑，为 Page 做数据、状态的读写、变换、暂存等。
+3. Service 负责与 HTTP 接口对接，进行纯粹的数据读写。
+
+## Model
+Model 是前端分层中的腰部力量，承上启下，负责管理数据（状态）。业界主流的状态管理类库有 redux、mobx，等。在我们的教程中，则使用 DVA 框架承担这一角色。
+```ts
+export default { // 打开dva
+  plugins: [
+    ['umi-plugin-react', {
+      antd: true,
+      dva: true,
+    }],
+  ],
+  // ...
+}
+```
+Model 示例
+```
+app.model({
+
+  namespace: 'todoList',
+
+  state: [],
+
+  effects: {
+    *query({ _ }, { put, call }) {
+      const rsp = yield call(queryTodoListFromServer);
+      const todoList = rsp.data;
+      yield put({ type: 'save', payload: todoList });
+    },
+  },
+
+  reducers: {
+    save(state, { payload: todoList }) {
+      return [...state, todoList];
+    },
+  },
+
+});
+```
+1. namespace：model 的命名空间，只能用字符串。一个大型应用可能包含多个 model，通过namespace区分。
+2. state：当前 model 状态的初始值，表示当前状态。
+3. reducers：用于处理同步操作，可以修改 state，由 action 触发。reducer 是一个纯函数，它接受当前的 state 及一个 action 对象。action 对象里面可以包含数据体（payload）作为入参，需要返回一个新的 state。
+4. effects：用于处理异步操作（例如：与服务端交互）和业务逻辑，也是由 action 触发。但是，它不可以修改 state，要通过触发 action 调用 reducer 实现对 state 的间接操作。
+5. action：是 reducers 及 effects 的触发器，一般是一个对象，形如{ type: 'add', payload: todo }，通过 type 属性可以匹配到具体某个 reducer 或者 effect，payload 属性则是数据体，用于传送给 reducer 或 effect。
