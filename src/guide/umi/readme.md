@@ -1,17 +1,23 @@
-## 架构
-![架构](https://gw.alipayobjects.com/zos/rmsportal/zvfEXesXdgTzWYZCuHLe.png)
-
+# Umi
 ## 历史
-2015 年之前我们有 Sea.JS、Arale、SPM 开源技术方案，大家可以有所耳闻。
+“2015 年之前我们有 Sea.JS、Arale、SPM 开源技术方案，大家可以有所耳闻。
 2015 年我们接入 React，从自研的 Roof 到 Redux 再到开源的 Dva，一步步验证我们的最佳实践，并把这些实践交给开源社区检验。
 2017 年开始尝试了新一代的企业级前端框架，Umi 和 Bigfish，前者是从无线业务中长出来的，后者是从中台业务中长出来的。
-一个团队出两个框架毕竟不是长久之计，后来老大直接把两拨人调到一个组，于是就愉快地合并在了一起。
+一个团队出两个框架毕竟不是长久之计，后来老大直接把两拨人调到一个组，于是就愉快地合并在了一起。”
 ![历史](http://5b0988e595225.cdn.sohucs.com/images/20190717/8e42b0fbccba4ff48a4f7f9f2acbdcc5.jpeg)
 ## 两个框架融合之和
 ![两个框架融合之和](http://5b0988e595225.cdn.sohucs.com/images/20190717/7c6ab855060444f281cdc424d2221fba.jpeg)
 
 内部数据：
+
 ![内部数据](http://5b0988e595225.cdn.sohucs.com/images/20190717/8f84ae3045ba4e7c9dd218a876e1c790.jpeg)
+
+## 理论基础
+![Utilize compiler](https://shipusercontent.com/5af08fa4045b39c3110110510422527b/Pasted%20Image%202.png)
+[umi as a Compiler (Full Version)](https://hackmd.io/@UXqYDTxCTie91Shvsppqyw/ByGeBtv9z?type=view#%E6%8F%92%E4%BB%B6%E6%9C%BA%E5%88%B6)
+
+## 架构
+![架构](https://gw.alipayobjects.com/zos/rmsportal/zvfEXesXdgTzWYZCuHLe.png)
 
 ## 插件
 市场：
@@ -42,6 +48,9 @@ React 的核心概念就是组件。UMI框架的主要功能，就是定义了�
 1. Page 负责与用户直接打交道：渲染页面、接受用户的操作输入，侧重于展示型交互性逻辑。
 2. Model 负责处理业务逻辑，为 Page 做数据、状态的读写、变换、暂存等。
 3. Service 负责与 HTTP 接口对接，进行纯粹的数据读写。
+
+## React -> React Redux -> Redux saga-> Dva
+[图解React->React Redux-> Redux sage-> Dva](https://www.yuque.com/flying.ni/the-tower/tvzasn)
 
 ## Model
 Model 是前端分层中的腰部力量，承上启下，负责管理数据（状态）。业界主流的状态管理类库有 redux、mobx，等。在我们的教程中，则使用 DVA 框架承担这一角色。

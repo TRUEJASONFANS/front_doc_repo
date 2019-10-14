@@ -28,7 +28,8 @@ module.exports = {
             "packager/others",
             "unit_test",
             "canvas_doc/",
-            "css_doc/"
+            "css_doc/",
+            "umi/"
           ]
         }
       ],
