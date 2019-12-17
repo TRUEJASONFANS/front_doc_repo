@@ -21,7 +21,7 @@
 **大意**: 本期文章篇幅短小却言简意骇，文中开头作者就抛出自己的观点 **Web 框架正在从运行库转变为优化编译器**。
 [精读]]](https://zhuanlan.zhihu.com/p/34931049)
 
-Umi 就像一个**编译期+运行时框架**
+Umi 更像一个**编译期框架**
 
 ## 架构
 ![架构](https://gw.alipayobjects.com/zos/rmsportal/zvfEXesXdgTzWYZCuHLe.png)
@@ -60,82 +60,93 @@ UMI框架的主要功能，就是定义了一套**编写和使用组件的规范
 ### Model
 Model 是前端分层中的腰部力量，承上启下，负责管理数据（状态）。业界主流的状态管理类库有 redux、mobx，等。在我们的教程中，则使用 [Dva概念](https://dvajs.com/guide/concepts.html#%E6%95%B0%E6%8D%AE%E6%B5%81%E5%90%91) 框架承担这一角色。
 ```javascript
-import { parse } from 'qs'
-import modelExtend from 'dva-model-extend'
-import api from 'api'
-import { pathMatchRegexp } from 'utils'
-import { model } from 'utils/model'
-
-const { queryDashboard, queryWeather } = api
-
-export default modelExtend(model, {
-  namespace: 'dashboard',
+import pathToRegexp from 'path-to-regexp';
+import * as pockerService from '@/pages/pockerRoom/services/pockerService';
+import { number, string } from 'prop-types';
+export default {
+  namespace: 'pockerBoard',
   state: {
-    weather: {
-      city: '深圳',
-      temperature: '30',
-      name: '晴',
-      icon: '//s5.sencdn.com/web/icons/3d_50/2.png',
+    scoreList: [],
+    roomName: '',
+    resetFlag: false,
+    curPage: 1,
+    totalPage: 1,
+    clickedNum: -1,
+    playerName: '',
+    featureName: '',
+    internalTaskName: ''
+  },
+  reducers: {//同步操作
+
+    syncRoomName(state, { payload: { roomName } }) {
+      return {...state, roomName }
     },
-    sales: [],
-    quote: {
-      avatar:
-        'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
+    
+    syncPage(state, {payload: {curPage, totalPage, resetFlag, scoreList, playerName, clickedNum, featureName, internalTaskName}}) {
+      return {...state, curPage, totalPage, resetFlag , scoreList, playerName, clickedNum, featureName, internalTaskName}
     },
-    numbers: [],
-    recentSales: [],
-    comments: [],
-    completed: [],
-    browser: [],
-    cpu: {},
-    user: {
-      avatar:
-        'http://img.hb.aicdn.com/bc442cf0cc6f7940dcc567e465048d1a8d634493198c4-sPx5BR_fw236',
+    // syncTotalPage(state, {payload: {totalPage}}) {
+    //   return {...state, totalPage}
+    // }
+  },
+  effects: {//异步操作
+    *queryStoryPoints({ payload: roomName }, { call }) {
+      yield call(pockerService, roomName);
+    },
+    *onClickPocker({ payload: values }, { call }) {
+      yield call(pockerService.onClickPocker, values)
+    },
+    *addTicketRecord({ payload: values }, { call }) {
+      yield call(pockerService.addTikcetRecord(values));
+    },
+    *onNextGame({ payload: values }, { call }) {
+      yield call(pockerService.onNextGame(values));
+    },
+    *AddStory({ payload: values }, { call }) {
+      yield call(pockerService.addStory(values));
+    },
+    *onNavigateToPage({ payload: values }, { call }) {
+      yield call(pockerService.onNavigateToPage(values));
     },
   },
-  subscriptions: {
-    setup({ dispatch, history }) {
-      history.listen(({ pathname }) => {
-        if (
-          pathMatchRegexp('/dashboard', pathname) ||
-          pathMatchRegexp('/', pathname)
-        ) {
-          dispatch({ type: 'query' })
-          dispatch({ type: 'queryWeather' })
+
+  subscriptions: {//订阅操作
+    init({ dispatch, history }) {
+      return history.listen(location => {
+        const match = pathToRegexp('/pockerRoom/:id').exec(location.pathname);
+        
+        if (match) {
+          var roomId = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+
+          //TODO: verify the backend whether the room is created or not
+          // join room
+          dispatch({
+            type: 'syncRoomName',
+            payload: {
+              roomName: roomId,
+            }
+          });
+          pockerService.fetch((data) => {
+            let parseJson = JSON.parse(data.body);
+            dispatch({
+              type: 'syncPage',
+              payload: {
+                curPage: parseJson.curNum,
+                totalPage: parseJson.totalNum,
+                resetFlag: parseJson.reset,
+                clickedNum: parseJson.clickedNum,
+                scoreList: parseJson.playerScoreList,
+                playerName: parseJson.playerName,
+                featureName: parseJson.featureName,
+                internalTaskName: parseJson.internalTaskName
+              }
+            });
+          }, roomId, 1);
         }
-      })
+      });
     },
   },
-  effects: {
-    *query({ payload }, { call, put }) {
-      const data = yield call(queryDashboard, parse(payload))
-      yield put({
-        type: 'updateState',
-        payload: data,
-      })
-    },
-    *queryWeather({ payload = {} }, { call, put }) {
-      payload.location = 'shenzhen'
-      const result = yield call(queryWeather, payload)
-      const { success } = result
-      if (success) {
-        const data = result.results[0]
-        const weather = {
-          city: data.location.name,
-          temperature: data.now.temperature,
-          name: data.now.text,
-          icon: `//s5.sencdn.com/web/icons/3d_50/${data.now.code}.png`,
-        }
-        yield put({
-          type: 'updateState',
-          payload: {
-            weather,
-          },
-        })
-      }
-    },
-  },
-})
+};
 
 ```
 
@@ -159,7 +170,7 @@ umi 是基于路由的，所以具备了管理入口的能力。你甚至可以�
 
 1. 组件，指通用组件，就是 antd，在下半年将要发布的 antd@4 里，我们会陆续提取更多通用组件到 antd 中。
 2. 业务组件，不能提取通用组件的，我们会提到内部统一的业务组件仓库中。
-3. 区块，由组件组成，可以想象成代码片段。
+3. 区块，由组件组成，可以想象成代码片段。 你可以自己定义自己的[区块](https://umijs.org/zh/guide/block.html#%E4%BD%BF%E7%94%A8%E5%8C%BA%E5%9D%97)以达到快速的代码初始化。[
 4. 页面模板，由区块组成
 
 市场：
@@ -168,8 +179,8 @@ umi 是基于路由的，所以具备了管理入口的能力。你甚至可以�
 
 ## 如何兼顾多类技术栈
 
-* MPA（多页应用）
-* 微前端 -> ["乾坤"](https://github.com/umijs/qiankun)
+* MPA（多页应用）部署较为麻烦？
+* 微前端 -> ["乾坤"](https://github.com/umijs/qiankun) 基于SPA 部署更简单？
 
 ## 参考
 * [Ant design实战](https://antd-course.ulivz.com/tydf0a.html)
