@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css"> 
+     .box1 {
+        height: 100px;
+        background-color: red;
+     }
+     .box2 {
+        height: 100px;
+        background-color: green;
+        position: relative;
+        left: 100px;
+        top: 50px;
+     }
+     .box3 {
+        height: 100px;
+        background-color: blue;
+        position: absolute;
+        left: 30px;
+        top: 30px;
+     }
+     .box4 {
+        height: 100px;
+        background-color: yellow;
+        position: fixed;
+        top: 800px;
+        left: 1080px;
+     }
+    </style>
+</head> 
+<body>
+    <div class="box1">我是默认定位</div>
+    <div class="box2">我是相对于我原来所在位置向left,和Top各偏移了30px</div>
+    <div class="box3">我是绝对定位，我不在文档流里了哈哈</div>
+    <div class="box4">我是固定定位，我是相对于浏览器视窗本身</div>
+</body>
+</html>
