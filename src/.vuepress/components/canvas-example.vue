@@ -123,11 +123,11 @@ module.exports = {
     SKY_VELOCITY = 8;
     GRASS_VELOCITY = 75;
     context.font = "48px Helvetica";
-    tree.src = "http://localhost:8080/resourse/smalltree.png";
-    nearTree.src = "http://localhost:8080/resourse/tree-twotrunks.png";
-    grass.src = "http://localhost:8080/resourse/grass.png";
-    grass2.src = "http://localhost:8080/resourse/grass2.png";
-    sky.src = "http://localhost:8080/resourse/sky.png";
+    tree.src = "http://www.zhongwei.tech/resourse/smalltree.png";
+    nearTree.src = "http://www.zhongwei.tech/resourse/tree-twotrunks.png";
+    grass.src = "http://www.zhongwei.tech/resourse/grass.png";
+    grass2.src = "http://www.zhongwei.tech/resourse/grass2.png";
+    sky.src = "http://www.zhongwei.tech/resourse/sky.png";
     sky.onload = () => this.draw();
     window.requestAnimationFrame(this.animatation);
   }
