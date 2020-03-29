@@ -2,7 +2,8 @@ module.exports = {
   title: "前端知识图谱",
   description: "front knowledge collecting repo.",
   port:"80",
-  dest:"docs",
+  base:"/front/",
+  dest:"docs/front",
   themeConfig: {
     repo: "TRUEJASONFANS/front_doc_repo",
     lastUpdated: "Last Updated",
