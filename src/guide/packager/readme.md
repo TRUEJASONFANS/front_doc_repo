@@ -11,10 +11,10 @@ next: ./others
 模块化的标准
 
 ## 示例： 以一个html5的游戏为例
-[海底大喂🐟](http://localhost:8080/TinyHeart.html)
+[海底大喂🐟](http://zhongwei.tech/front/TinyHeart.html)
 
 经过模块化打包后的解决方案
-[海底大喂🐟v2](http://localhost:8080/TinyHeart_v2.html)
+[海底大喂🐟v2](http://zhongwei.tech/front/TinyHeart_v2.html)
 
 模块化帮我们解决需要帮我们解决以下几个问题
 - 如何向其他模块导出
