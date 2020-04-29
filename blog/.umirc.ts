@@ -3,8 +3,10 @@ import { IConfig } from 'umi-types';
 // ref: https://umijs.org/config/
 const config: IConfig =  {
   treeShaking: true,
+  base:"blog",
   routes: [
     {
+      
       path: '/',
       component: '../layouts/BasicLayout',
       routes: [
