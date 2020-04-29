@@ -29,7 +29,8 @@ module.exports = {
             "unit_test",
             "canvas_doc/",
             "css_doc/",
-            "umi/"
+            "umi/",
+            "react/"
           ]
         }
       ],
