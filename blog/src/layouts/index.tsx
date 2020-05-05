@@ -7,13 +7,14 @@
 import React, { ReactNode } from 'react';
 import { Layout } from 'antd';
 import Header from './Header';
-const { Content } = Layout;
+import MainFooter from '@/layouts/Footer';
+const { Content, Footer } = Layout;
 
 interface Props {
-  children: ReactNode
+  children?: ReactNode
 }
 
-const BasicLayout = (props: Props) => (
+const indexPage = (props: Props) => (
   <React.Fragment>
     <Layout>
       <Header />
@@ -24,4 +25,4 @@ const BasicLayout = (props: Props) => (
   </React.Fragment>
 );
 
-export default BasicLayout;
+export default indexPage;

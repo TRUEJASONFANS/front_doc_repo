@@ -27,7 +27,7 @@ const tabs = [
 ];
 
 interface Props {
-  users: {}
+  users?: {}
 }
 
 
