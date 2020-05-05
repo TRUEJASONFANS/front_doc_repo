@@ -68,3 +68,5 @@ src/.vuepress/public
 
 # dist build
 docs/front
+docs/blog
+.DS_Store
