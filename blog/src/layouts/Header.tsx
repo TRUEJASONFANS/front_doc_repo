@@ -1,10 +1,7 @@
 import React, { PureComponent} from 'react';
 import { Layout, Menu } from 'antd';
 import Link from 'umi/link';
-import moment from 'moment';
-import { connect } from 'dva';
 import './Header.less';
-import UserAvatar from '../components/common/UserAvatar';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
@@ -34,6 +31,38 @@ export default class MainHeader extends PureComponent<Props> {
    
   }
 
+  renderMainHeaderRight(){
+    return (
+    //   user && user.user_id
+    // ? (
+    //   // <span>{user.nickname}</span>
+    //   <Menu onClick={this.handleClick} mode="horizontal">
+    //       <SubMenu
+    //         title={
+    //           <UserAvatar src={user.avatar} />
+    //       }
+    //       >
+    //         <Menu.Item key="setting:1">写文章</Menu.Item>
+    //         <Menu.Item key="setting:2">草稿</Menu.Item>
+    //         <Menu.Divider />
+    //         <Menu.Item key="setting:3">个人中心</Menu.Item>
+    //         <Menu.Item key="setting:4">设置</Menu.Item>
+    //         <Menu.Item key="setting:5">主题</Menu.Item>
+    //         <Menu.Divider />
+    //         <Menu.Item key="setting:6" onClick={this.logout}>退出</Menu.Item>
+    //       </SubMenu>
+    //   </Menu>
+    // )
+    // : (
+      <span>
+        <Link to="/user/login">登录</Link>
+        <span style={{ padding: 10 }}>·</span>
+        <Link to="/user/register">注册</Link>
+      </span>
+    )
+    
+  }
+
   render () {
     let user = this.props.users;
     return (
@@ -51,35 +80,7 @@ export default class MainHeader extends PureComponent<Props> {
           </Menu>
         </div>
         <div className="main-header-right">
-          {
-            user && user.user_id
-              ? (
-                // <span>{user.nickname}</span>
-                <Menu onClick={this.handleClick} mode="horizontal">
-                    <SubMenu
-                      title={
-                        <UserAvatar src={user.avatar} />
-                    }
-                    >
-                      <Menu.Item key="setting:1">写文章</Menu.Item>
-                      <Menu.Item key="setting:2">草稿</Menu.Item>
-                      <Menu.Divider />
-                      <Menu.Item key="setting:3">个人中心</Menu.Item>
-                      <Menu.Item key="setting:4">设置</Menu.Item>
-                      <Menu.Item key="setting:5">主题</Menu.Item>
-                      <Menu.Divider />
-                      <Menu.Item key="setting:6" onClick={this.logout}>退出</Menu.Item>
-                    </SubMenu>
-                </Menu>
-              )
-              : (
-                <span>
-                  <Link to="/user/login">登录</Link>
-                  <span style={{ padding: 10 }}>·</span>
-                  <Link to="/user/register">注册</Link>
-                </span>
-              )
-          }
+          {this.renderMainHeaderRight()}
         </div>
       </Header>
     );

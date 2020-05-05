@@ -3,6 +3,7 @@ import { IConfig } from 'umi-types';
 // ref: https://umijs.org/config/
 const config: IConfig =  {
   treeShaking: true,
+  disableCSSModules: true,
   base:"/blog/",
   outputPath:"../docs/blog",
   publicPath: "/blog/",
