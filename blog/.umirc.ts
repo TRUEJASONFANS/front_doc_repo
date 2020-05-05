@@ -3,21 +3,22 @@ import { IConfig } from 'umi-types';
 // ref: https://umijs.org/config/
 const config: IConfig =  {
   treeShaking: true,
-  base:"blog",
-  routes: [
-    {
-      
-      path: '/',
-      component: '../layouts/BasicLayout',
-      routes: [
-        {
-          path: '/',
-          name: 'home',
-          component: './home/home',
-        },
-      ]
-    }
-  ],
+  base:"/blog/",
+  outputPath:"../docs/blog",
+  publicPath: "/blog/",
+  // routes: [
+  //   {
+  //     path: '/',
+  //     component: '../layouts/BasicLayout',
+  //     routes: [
+  //       {
+  //         path: '/',
+  //         name: 'home',
+  //         component: './home/home',
+  //       },
+  //     ]
+  //   }
+  // ],
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
     ['umi-plugin-react', {
