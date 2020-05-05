@@ -1,11 +1,5 @@
-/*
- * @Author: 柒叶
- * @Date: 2019-09-08 10:13:54
- * @Last Modified by: 柒叶
- * @Last Modified time: 2019-10-21 15:44:31
- */
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import {
   Card,
@@ -17,13 +11,23 @@ import HomeLeftSiderBar from '@/components/HomeLeftSiderBar';
 import SiderList from '@/components/SiderList';
 import HomeArticleList from '@/components/HomeArticleList';
 import './home.less';
+import { Interface } from 'readline';
 
 // @connect(({ article, loading }) => ({
 //   article, loading: loading.effects['article/articleList'],
 // }))
-class Home extends Component {
-  state={
-    currentCategory: null,
+interface HomeState {
+  currentCategory: string[],
+}
+interface Props{
+
+}
+class Home extends PureComponent<Props, HomeState> {
+  constructor(props:Props) {
+    super(props);
+    this.state = {
+      currentCategory : [],
+    }
   }
   componentDidMount() {
     // const { dispatch } = this.props;
@@ -43,7 +47,7 @@ class Home extends Component {
     //   article: { articleList, hotList, categorys, isEmptyList },
     //   loading,
     // } = this.props;
-    let loading = true;
+    let loading = false;
     let isEmptyList:object[] = [];
     let articleList:object[] = [];
     let hotList:object[] = [];
@@ -53,12 +57,12 @@ class Home extends Component {
           <Col md={19} sm={20} xs={24}>
             <Row type="flex" justify="space-between">
               <Col lg={3} sm={7} xs={0}>
-                {/* <HomeLeftSiderBar
-                  categorys={categorys}
+                <HomeLeftSiderBar
                   loading={loading}
-                /> */}
+                  categorys={this.state.currentCategory}
+                />
               </Col>
-              <Col lg={16} sm={16} xs={24}>
+              {/* <Col lg={16} sm={16} xs={24}>
                 <Card
                   bordered={false}
                   loading={loading}
@@ -84,7 +88,7 @@ class Home extends Component {
                     split={false}
                   />
                 </Card>
-              </Col>
+              </Col> */}
             </Row>
           </Col>
         </Row>
