@@ -1,10 +1,3 @@
-/*
- * @Author: 柒叶
- * @Date: 2019-09-08 21:45:31
- * @Last Modified by: 柒叶
- * @Last Modified time: 2019-10-21 17:45:56
- */
-
 import React, { PureComponent} from 'react';
 import { Layout, Menu } from 'antd';
 import Link from 'umi/link';
