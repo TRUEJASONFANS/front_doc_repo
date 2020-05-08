@@ -2,17 +2,14 @@
 import React from 'react';
 import TodoList from '@/pages/todos/components/TodoList';
 import TodoForm from './components/Todoform';
+import {TodoItemModel} from "@/pages/todos/model";
 class TodoHeader extends React.Component {
   render () {
     return <h1>Todo list</h1>;
   }
 }
 
-interface TodoItemModel {
-  index: number,
-  value: string, 
-  done: boolean,
-}
+
 
 interface TodoState {
   todoItems: TodoItemModel[],
@@ -36,17 +33,17 @@ export default class TodoApp extends React.Component<any,TodoState> {
     let todoItems = this.state.todoItems
     todoItems.unshift({
       index: todoItems.length+1, 
-      value: todoItem.newItemValue, 
+      value: todoItem.value, 
       done: false
     });
     this.setState({todoItems: todoItems});
   }
-  removeItem (itemIndex) {
+  removeItem (itemIndex: number) {
     let todoItems = this.state.todoItems
     todoItems.splice(itemIndex, 1);
     this.setState({todoItems: todoItems});
   }
-  markTodoDone(itemIndex) {
+  markTodoDone(itemIndex: number) {
     let todoItems = this.state.todoItems
     var todo = todoItems[itemIndex];
     todoItems.splice(itemIndex, 1);

@@ -1,6 +1,9 @@
 import React from 'react';
-export default class TodoForm extends React.Component {
-  constructor(props) {
+interface TodoFormProps {
+  addItem: Function
+}
+export default class TodoForm extends React.Component<TodoFormProps> {
+  constructor(props: TodoFormProps) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -10,18 +13,18 @@ export default class TodoForm extends React.Component {
   onSubmit(event) {
     event.preventDefault();
     var newItemValue = this.refs.itemName.value;
-    
-    if(newItemValue) {
-      this.props.addItem({newItemValue});
+
+    if (newItemValue) {
+      this.props.addItem({ value: newItemValue });
       this.refs.form.reset();
     }
   }
-  render () {
+  render() {
     return (
       <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-        <input type="text" ref="itemName" className="form-control" placeholder="add a new todo..."/>
-        <button type="submit" className="btn btn-default">Add</button> 
+        <input type="text" ref="itemName" className="form-control" placeholder="add a new todo..." />
+        <button type="submit" className="btn btn-default">Add</button>
       </form>
-    );   
+    );
   }
 }

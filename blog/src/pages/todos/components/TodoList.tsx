@@ -1,5 +1,13 @@
 import React from 'react';
-export default class TodoList extends React.Component {
+import {TodoItemModel} from "@/pages/todos/model";
+
+interface TodoListProps {
+  items: Array<TodoItemModel>,
+  removeItem: Function,
+  markTodoDone: Function
+}
+
+export default class TodoList extends React.Component<TodoListProps> {
   render () {
     var items = this.props.items.map((item, index) => {
       return (
@@ -11,19 +19,26 @@ export default class TodoList extends React.Component {
     );
   }
 }
+
+interface TodoListItemProps {
+  removeItem: Function,
+  markTodoDone: Function,
+  index: number,
+  item:TodoItemModel,
+}
   
-class TodoListItem extends React.Component {
-  constructor(props) {
+class TodoListItem extends React.Component<TodoListItemProps> {
+  constructor(props:TodoListItemProps) {
     super(props);
     this.onClickClose = this.onClickClose.bind(this);
     this.onClickDone = this.onClickDone.bind(this);
   }
   onClickClose() {
-    var index = parseInt(this.props.index);
+    var index = this.props.index;
     this.props.removeItem(index);
   }
   onClickDone() {
-    var index = parseInt(this.props.index);
+    var index = this.props.index;
     this.props.markTodoDone(index);
   }
   render () {
