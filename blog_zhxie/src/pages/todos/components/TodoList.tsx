@@ -1,5 +1,6 @@
 import React from 'react';
-import {TodoItemModel} from "@/pages/todos/model";
+import { TodoItemModel } from '../model';
+
 
 interface TodoListProps {
   items: Array<TodoItemModel>,

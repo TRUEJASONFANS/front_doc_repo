@@ -8,9 +8,9 @@ import React, { Component } from 'react';
 import { Anchor } from 'antd';
 
 
-class ArticleAnchor extends Component {
-  anchorRender=(data) => {
-    return data.map((item) => {
+class ArticleAnchor extends Component<any> {
+  anchorRender=(data: { children: any; tag: any; title: any; href: any; ismain: any; }[]) => {
+    return data.map((item: { children: any; tag: any; title: any; href: any; ismain: any; }) => {
       if (item.children) {
         return (
           <Anchor.Link key={`${item.tag}-${item.title}`} href={`#${item.href}`} title={item.title} className={item.ismain ? 'bold' : ''}>

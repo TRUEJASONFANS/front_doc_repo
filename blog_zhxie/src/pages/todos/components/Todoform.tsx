@@ -8,16 +8,16 @@ export default class TodoForm extends React.Component<TodoFormProps> {
     this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount() {
-    this.refs.itemName.focus();
+    // this.refs.itemName.focus();
   }
-  onSubmit(event) {
+  onSubmit(event: { preventDefault: () => void; }) {
     event.preventDefault();
-    var newItemValue = this.refs.itemName.value;
+    // var newItemValue = this.refs.itemName.value;
 
-    if (newItemValue) {
-      this.props.addItem({ value: newItemValue });
-      this.refs.form.reset();
-    }
+    // if (newItemValue) {
+    //   this.props.addItem({ value: newItemValue });
+    //   this.refs.form.reset();
+    // }
   }
   render() {
     return (
