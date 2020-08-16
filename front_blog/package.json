@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "dev": "vuepress dev src",
+    "build": "vuepress build src",
+    "deploy": "scp -r docs root@47.105.83.51:/root/bin",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "vuepress": "^1.0.0-rc.1"
+  }
+}
