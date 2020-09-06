@@ -2,6 +2,7 @@
   "name": "blog_zhxie",
   "version": "0.1.0",
   "private": true,
+  "homepage": "todos",
   "dependencies": {
     "@babel/core": "7.9.0",
     "@svgr/webpack": "4.3.3",
@@ -144,6 +145,11 @@
     "presets": [
       "react-app"
     ]
+<<<<<<< HEAD
   },
   "devDependencies": {}
+=======
+  }
+  
+>>>>>>> 73784cadba5576d8b40dbff53f26f9e2161e488b
 }
