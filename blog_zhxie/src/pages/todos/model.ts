@@ -6,7 +6,8 @@ export default {
 }
 
 export interface TodoItemModel {
-  index: number,
-  value: string, 
+  ID: number,
+  Name: string, 
   done: boolean,
+  dateTime: number,
 }

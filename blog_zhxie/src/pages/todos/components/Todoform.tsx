@@ -1,30 +1,32 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { TodoItemModel } from '../model';
 interface TodoFormProps {
-  addItem: Function
+  addItem: (t:TodoItemModel) => void
 }
-export default class TodoForm extends React.Component<TodoFormProps> {
-  constructor(props: TodoFormProps) {
-    super(props);
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-  componentDidMount() {
-    // this.refs.itemName.focus();
-  }
-  onSubmit(event: { preventDefault: () => void; }) {
-    event.preventDefault();
-    // var newItemValue = this.refs.itemName.value;
 
-    // if (newItemValue) {
-    //   this.props.addItem({ value: newItemValue });
-    //   this.refs.form.reset();
-    // }
+export default function TodoForm(props: TodoFormProps) {
+
+  const inputRef = useRef(null);
+  const formRef = useRef(null);
+
+  const onSubmit = (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
+    var newItemValue = inputRef.current.value;
+
+    if (newItemValue) {
+      props.addItem({ Name: newItemValue} as TodoItemModel);
+      formRef.current.reset();
+    }
   }
-  render() {
-    return (
-      <form ref="form" onSubmit={this.onSubmit} className="form-inline">
-        <input type="text" ref="itemName" className="form-control" placeholder="add a new todo..." />
-        <button type="submit" className="btn btn-default">Add</button>
-      </form>
-    );
-  }
+
+  useEffect(()=> {
+    inputRef.current.focus();
+  });
+
+  return (
+    <form ref={formRef} onSubmit={onSubmit} className="form-inline">
+      <input type="text" ref={inputRef} className="form-control" placeholder="add a new todo..." />
+      <button type="submit" className="btn btn-default">Add</button>
+    </form>
+  );
 }
