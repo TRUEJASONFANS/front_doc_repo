@@ -2,7 +2,7 @@
 ## React.createClass deprecated
 belong to es5
 
-##函数式组件
+## 函数式组件
 ```tsx
 import React from 'react';
 
@@ -14,7 +14,7 @@ function HelloComponent(props:Props, /* context */) {
 }
 export default HelloComponent;
 ```
-1. 函数式组件无副作用（React 组件中执行过数据获取、订阅或者手动修改过 DOM。我们统一把这些操作称为“副作用”，或者简称为“作用”。）
+1. 函数式组件无副作用
 2. 组件不能访问this对象
 3. 组件无法访问生命周期的方法
 4. react 未来会对函数式组件性能进行提升优化。
@@ -93,6 +93,9 @@ let setFruit = fruitStateVariable[1]; // 数组里的第二个值
 当我们使用 useState 定义 state 变量时候，它返回一个有两个值的数组。第一个值是当前的 state，第二个值是更新 state 的函数。使用 [0] 和 [1] 来访问有点令人困惑，因为它们有特定的含义。这就是我们使用数组解构的原因。
 ```
 3. 使用effect代替副作用
+
+什么是副作用？
+React 组件中执行过数据获取、订阅或者手动修改过 DOM。我们统一把这些操作称为“副作用”，或者简称为“作用”.
 
 ```tsx
 class Example extends React.Component {
