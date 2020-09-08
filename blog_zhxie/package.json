@@ -145,11 +145,6 @@
     "presets": [
       "react-app"
     ]
-<<<<<<< HEAD
   },
   "devDependencies": {}
-=======
-  }
-  
->>>>>>> 73784cadba5576d8b40dbff53f26f9e2161e488b
 }
