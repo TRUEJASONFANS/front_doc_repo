@@ -71,3 +71,9 @@ docs/front
 docs/blog
 docs/todos
 .DS_Store
+.idea/front_doc_repo.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/workspace.xml
