@@ -30,7 +30,15 @@ module.exports = {
             "canvas_doc/",
             "css_doc/",
             "umi/",
-            "react/"
+            "react/",
+            {
+              title: "react进阶",
+              path: "react/react2"
+            },
+            {
+              title: "react query",
+              path: "react/react_query"
+            }
           ]
         }
       ],

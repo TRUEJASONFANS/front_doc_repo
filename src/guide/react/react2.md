@@ -1,3 +1,12 @@
+---
+sidebar: auto
+next: ./react_query.md
+---
+
+# react 进阶
+
+sss
+
 ## 三大周期
 Mounting：已插入真实 DOM
 Updating：正在被重新渲染
@@ -19,6 +28,89 @@ Unmounting：已移出真实 DOM
 
 7. componentWillUnmount在组件从 DOM 中移除之前立刻被调用。
 
+
+
+
+### HOC
+
+React的高阶组件主要用于组件之间共享通用功能而不重复代码的模式（也就是达到DRY模式）。
+
+高阶组件实际是一个函数。 HOC函数将组件作为参数并返回一个新的组件。它将组件转换为另一个组件并添加额外的数据或功能。
+
+```jsx
+import React from 'react';
+
+const withSecretToLife = (WrappedComponent) => {
+  class HOCExample extends React.Component {
+    render() {
+      return (
+        <WrappedComponent
+          secretToLife={42}
+          {...this.props}
+        />
+      );
+    }
+  }
+    
+  return HOC;
+};
+
+export default withSecretToLife;
+
+import React from 'react';
+import withSecretToLife from 'components/withSecretToLife';
+
+const DisplayTheSecret = props => (
+  <div>
+    The secret to life is {props.secretToLife}.
+  </div>
+);
+
+const WrappedComponent = withSecretToLife(DisplayTheSecret);
+
+export default WrappedComponent;
+```
+已知secretToLife为42，有一些组件需要共享这个信息，此时创建了SecretToLife的HOC，将它作为prop传递给我们的组件。
+
+此时，WrappedComponent只是DisplayTheSecret的增强版本，允许我们访问secretToLife属性。
+
+### render props
+Render Props 的核心思想是，通过一个函数将class组件的state作为props传递给纯函数组件
+```
+import React from 'react';
+
+const SharedComponent extends React.Component {
+  state = {...}
+  render() {
+    return (
+      <div>
+        {this.props.render(this.state)}
+      </div>
+    );
+  }
+}
+
+export default SharedComponent;
+
+//this.props.render()是由另外一个组件传递过来的。为了使用以上组件，我们可以进行下面的操作：
+
+import React from 'react';
+import SharedComponent from 'components/SharedComponent';
+
+const SayHello = () => (
+  <SharedComponent render={(state) => (
+    <span>hello!,{...state}</span>
+  )} />
+);
+
+```
+
+
+作者：Perkin_
+链接：https://www.jianshu.com/p/ff6b3008820a
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 ## Hook 使你在无需修改组件结构的情况下复用状态逻辑
 理解每一次的 Rendering
 每一次渲染都有它自己的 Props and State
@@ -27,11 +119,10 @@ Unmounting：已移出真实 DOM
 Hook 不能在 class 组件中使用
 ### 副作用 side effect
 
-
-
 ### useEffect
 基本上90%的情况下,都应该用这个,这个是在render结束后,你的callback函数执行,但是不会block browser painting,算是某种异步的方式吧,但是class的componentDidMount 和componentDidUpdate是同步的,在render结束后就运行,useEffect在大部分场景下都比class的方式性能更好.
 
 ### useLayoutEffect
 这个是用在处理DOM的时候,当你的useEffect里面的操作需要处理DOM,并且会改变页面的样式,就需要用这个,否则可能会出现出现闪屏问题, useLayoutEffect里面的callback函数会在DOM更新完成后立即执行,但是会在浏览器进行任何绘制之前运行完成,阻塞了浏览器的绘制.
+
 

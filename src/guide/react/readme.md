@@ -1,3 +1,7 @@
+---
+prev: false
+next: ./react2.md
+---
 # React声明组件的几种方式
 ## React.createClass deprecated
 belong to es5
