@@ -16,3 +16,7 @@ Parcel是基于资源的,资源可以代表任意文件,并且 Parcel 对 JavaSc
     Use a node-style require() to organize your browser code and load modules installed by npm.
     browserify will recursively analyze all the require() calls in your app in order to build a bundle you can serve up to the browser in a single <script> tag.
 
+## Grunt
+node 自动化程序， 负责自动化 运行一些列已经成熟的插件任务 或 自定义的任务。
+
+## bower
