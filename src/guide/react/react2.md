@@ -76,7 +76,7 @@ export default WrappedComponent;
 
 ### render props
 Render Props 的核心思想是，通过一个函数将class组件的state作为props传递给纯函数组件
-```
+```javascript
 import React from 'react';
 
 const SharedComponent extends React.Component {
@@ -105,11 +105,8 @@ const SayHello = () => (
 
 ```
 
+[本文节选自](https://www.jianshu.com/p/ff6b3008820a)
 
-作者：Perkin_
-链接：https://www.jianshu.com/p/ff6b3008820a
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
 ## Hook 使你在无需修改组件结构的情况下复用状态逻辑
 理解每一次的 Rendering
