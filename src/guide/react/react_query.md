@@ -3,8 +3,6 @@ sidebar: auto
 ---
 # react-query
 
-[本文节选自](https://developer.51cto.com/art/202007/621844.htm)
-
 React 是一个专注的组件库。因此，它对如何请求远程数据没有什么建议。如果要通过 HTTP 请求数据并将其发送到 Web API，可以考虑下面四种方法。
 
 1. 内联写法
