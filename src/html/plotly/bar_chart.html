@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id='myDiv' style='width:1080px;height:800px;'></div>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script>
+        let new_bugs = [232, 217, 152, 129, 75]
+
+        let releases = ['D4C 4.4', 'D4C 5.0', 'D4C 5.1', 'D4C 6.0']
+
+        let scopes = ['49', '63.7', '37.6', '36.16']
+
+        let fix_length = scopes.length
+
+        for (let i = 0; i < releases.length - fix_length; i++) {
+            scopes.unshift('');
+        }
+
+        var trace = {
+            x: releases,
+            y: new_bugs,
+            type: 'bar',
+            name: 'Release new introduced bugs',
+            marker: {
+                color: 'red',
+            }
+        };
+
+
+        var trace2 = {
+            x: releases,
+            y: scopes,
+            type: 'bar',
+            name: 'Release scope',
+            marker: {
+                color: '#32CD32',
+            }
+        }
+
+        var layout = {
+            barmode: 'group', bargroupgap: 0.05,
+            xaxis: {
+                tickangle: 45
+            },
+        };
+        var data = [trace2, trace];
+        Plotly.newPlot('myDiv', data, layout);
+
+    </script>
+
+</body>
+
+</html>

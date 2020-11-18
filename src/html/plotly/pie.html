@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    
+    <div id="myDiv" style="display:inline-block"></div>
+    <div id="myDiv2" style="display:inline-block"></div>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <script>
+        var data = [{
+            values: [184422, 151349],
+            labels: ['Cover instructions', 'Missed instructons'],
+            type: 'pie',
+        }];
+
+        var layout = {
+            height: 400,
+            width: 500,
+            title: 'before clean unused code',
+        };
+
+        Plotly.newPlot('myDiv', data, layout);
+        var data2 = [{
+            values: [184263, 118498],
+            labels: ['Cover instructions', 'Missed instructons'],
+            type: 'pie',
+        }];
+
+        var layout2 = {
+            height: 400,
+            width: 500,
+            title: 'clean unused code',
+        };
+
+        Plotly.newPlot('myDiv2', data2, layout2);
+    </script>
+    
+</body>
+
+</html>
