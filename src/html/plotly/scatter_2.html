@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <div id='mydiv' style='width:2000px;height:500px;'>
+        <script>
+            console.log(Plotly.d3)
+            TESTER = document.getElementById('mydiv');
+            var x = ['(1740)', '(3060)', '(1434)', '(496)', '(4197)'];
+            var y = ['109.4892349243164', '108.36033630371094', '104.34274291992188', '104.30921173095703', '104.00581359863281'];
+            var trace = {
+                x:x,
+                y:y,
+                type: 'scatter',
+                mode: 'markers+text',
+            }
+            var data = [trace];
+            var layout = {
+                title: 'Min_distance Ranking',
+            }
+            Plotly.newPlot('mydiv', data, layout);
+        </script>
+</body>
+
+</html>
