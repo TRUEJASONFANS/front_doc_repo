@@ -20,53 +20,57 @@
 <body>
   <!-- Load d3.js -->
   <script src="https://d3js.org/d3.v4.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js" integrity="sha512-5mCB0Kvv97yTzqo0174qxPjMisck/WlK51+mw/RV7UfYbtHI8LuLR82BzZuxHUKSfbh75u9cZHgUcqrZDaBJuA=="
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"
+    integrity="sha512-5mCB0Kvv97yTzqo0174qxPjMisck/WlK51+mw/RV7UfYbtHI8LuLR82BzZuxHUKSfbh75u9cZHgUcqrZDaBJuA=="
     crossorigin="anonymous"></script>
   <!-- Create a div where the graph will take place -->
-  <div id="my_dataviz"></div>
-  <div id="legendLinear"></div>
+  <div id="my_dataviz" style="display:inline-block"></div>
+  <div id="legendLinear" style="display:inline-block; overflow: auto; width:300px;height: 500px;"></div>
 
   <script>
 
-    // set the dimensions and margins of the graph
-    var margin = { top: 30, right: 50, bottom: 10, left: 50 },
-      width = 460 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+    function parallel_plot(inputData, dimensions) {
+      // set the dimensions and margins of the graph
+      var margin = { top: 30, right: 50, bottom: 10, left: 50 },
+        width = 460 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
-    // append the svg object to the body of the page
-    var svg = d3.select("#my_dataviz")
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform",
-        "translate(" + margin.left + "," + margin.top + ")");
+      // append the svg object to the body of the page
+      var svg = d3.select("#my_dataviz")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
-    // Parse the Data
-    d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function (data) {
+      // define the Data
+      let data = inputData
 
       // Color scale: give me a specie name, I return a color
       var color = d3.scaleOrdinal()
-        .domain(["setosa", "versicolor", "virginica"])
-        .range(["#440154ff", "#21908dff", "#fde725ff"])
+        .domain(data.map(d => d.Species % 20))
+        .range(['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c', '#98df8a', '#d62728', '#ff9896', '#9467bd', '#c5b0d5',
+          '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5'])
 
       // Here I set the list of dimension manually to control the order of axis:
-      dimensions = ["Petal_Length", "Petal_Width", "Sepal_Length", "Sepal_Width"]
 
       // For each dimension, I build a linear scale. I store all in a y object
       var y = {}
       for (i in dimensions) {
-        name = dimensions[i]
+        name = dimensions[i].name
         y[name] = d3.scaleLinear()
-          .domain([0, 8]) // --> Same axis range for each group
+          .domain([dimensions[i].min, dimensions[i].max]) // --> Same axis range for each group
           // --> different axis range for each group --> .domain( [d3.extent(data, function(d) { return +d[name]; })] )
           .range([height, 0])
       }
 
+
+
       // Build the X scale -> it find the best position for each Y axis
       x = d3.scalePoint()
-        .range([0, width])
-        .domain(dimensions);
+        .domain(dimensions.map(d => d.name))
+        .range([0, width]);
 
       // Highlight the specie that is hovered
       var highlight = function (d) {
@@ -94,8 +98,8 @@
       }
 
       // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
-      function path(d) {
-        return d3.line()(dimensions.map(function (p) { return [x(p), y[p](d[p])]; }));
+      function path(data) {
+        return d3.line()(dimensions.map(function (p) { return [x(p.name), y[p.name](data[p.name])]; }));
       }
 
       // Draw the lines
@@ -115,7 +119,7 @@
       // Draw the axis:
       svg.selectAll("myAxis")
         // For each dimension of the dataset I add a 'g' element:
-        .data(dimensions).enter()
+        .data(dimensions.map(d => d.name)).enter()
         .append("g")
         .attr("class", "axis")
         // I translate this element to its right position on the x axis
@@ -129,24 +133,31 @@
         .text(function (d) { return d; })
         .style("fill", "black")
 
+
+      var svg = d3.select("#legendLinear").append("svg")
+
+      svg.append("g")
+        .attr("class", "legendOrdinal")
+        .attr("transform", "translate(20,20)");
+
+      var legendOrdinal = d3.legendColor()
+        //d3 symbol creates a path-string, for example
+        //"M0,-8.059274488676564L9.306048591020996,
+        //8.059274488676564 -9.306048591020996,8.059274488676564Z"
+        .shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
+        .shapePadding(10)
+        //use cellFilter to hide the "e" cell
+        .cellFilter(function (d) { return d.label !== "e" })
+        .scale(color);
+
+      svg.select(".legendOrdinal")
+        .call(legendOrdinal);
+    }
+    d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/iris.csv", function (data) {
+      dimensions = [{ name: "Petal_Length", min: 0, max: 8 }, { name: "Petal_Width", min: 0, max: 10 }, { name: "Sepal_Length", min: 0, max: 15 }, { name: "Sepal_Width", min: 0, max: 5 }]
+      parallel_plot(data, dimensions);
     })
-    var linear = d3.scaleLinear()
-      .domain([0, 10])
-      .range(["rgb(46, 73, 123)", "rgb(71, 187, 94)"]);
 
-    var svg = d3.select("svg");
-
-    svg.append("g")
-      .attr("class", "legendLinear")
-      .attr("transform", "translate(20,20)");
-
-    var legendLinear = d3.legendColor()
-      .shapeWidth(30)
-      .orient('horizontal')
-      .scale(linear);
-
-    svg.select(".legendLinear")
-      .call(legendLinear);
   </script>
 </body>
 
