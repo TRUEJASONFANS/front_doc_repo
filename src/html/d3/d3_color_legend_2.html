@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .axis {
+      opacity: 0.4;
+    }
+
+    .axis:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js" integrity="sha512-5mCB0Kvv97yTzqo0174qxPjMisck/WlK51+mw/RV7UfYbtHI8LuLR82BzZuxHUKSfbh75u9cZHgUcqrZDaBJuA==" crossorigin="anonymous"></script>
+  <!-- Create a div where the graph will take place -->
+  <div>
+      <div id="my_dataviz" style="display:inline-block;height: 500px"></div>
+      <div id="legendLinear" style="display:inline-block; height: 500px;"></div>
+  </div>
+  <script>
+
+      function parallel_plot(inputData, dimensions) {
+        // set the dimensions and margins of the graph
+        var margin = { top: 30, right: 50, bottom: 10, left: 50 },
+          width = 800 - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
+  
+        // append the svg object to the body of the page
+        var svg = d3.select("#my_dataviz")
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+  
+        // define the Data
+        let data = inputData
+  
+        // Color scale: give me a specie name, I return a color
+        var color = d3.scaleOrdinal()
+          .domain(data.map(d => d.Species % 20))
+          .range(['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c', '#98df8a', '#d62728', '#ff9896', '#9467bd', '#c5b0d5',
+            '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f', '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5'])
+  
+        // Here I set the list of dimension manually to control the order of axis:
+  
+        // For each dimension, I build a linear scale. I store all in a y object
+        var y = {}
+        for (i in dimensions) {
+          name = dimensions[i].name
+          y[name] = d3.scaleLinear()
+            .domain([dimensions[i].min, dimensions[i].max]) // --> Same axis range for each group
+            // --> different axis range for each group --> .domain( [d3.extent(data, function(d) { return +d[name]; })] )
+            .range([height, 0])
+        }
+
+        // Build the X scale -> it find the best position for each Y axis
+        x = d3.scalePoint()
+          .domain(dimensions.map(d => d.name))
+          .range([0, width]);
+  
+        // Highlight the specie that is hovered
+        var highlight = function (d) {
+  
+          selected_specie = d.Species
+  
+          // first every group turns grey
+          d3.selectAll(".line")
+            .transition().duration(200)
+            .style("stroke", "lightgrey")
+            .style("opacity", "0.2")
+          // Second the hovered specie takes its color
+          d3.selectAll("." + selected_specie)
+            .transition().duration(200)
+            .style("stroke", color(selected_specie))
+            .style("opacity", "1")
+        }
+
+        // Unhighlight
+        var doNotHighlight = function (d) {
+          d3.selectAll(".line")
+            .transition().duration(200).delay(1000)
+            .style("stroke", function (d) { return (color(d.Species)) })
+            .style("opacity", "1")
+        }
+  
+        // The path function take a row of the csv as input, and return x and y coordinates of the line to draw for this raw.
+        function path(data) {
+          return d3.line()(dimensions.map(function (p) { return [x(p.name), y[p.name](data[p.name])]; }));
+        }
+  
+        // Draw the lines
+        svg
+          .selectAll("myPath")
+          .data(data)
+          .enter()
+          .append("path")
+          .attr("class", function (d) { return "line " + d.Species }) // 2 class for each line: 'line' and the group name
+          .attr("d", path)
+          .style("fill", "none")
+          .style("stroke", function (d) { return (color(d.Species)) })
+          .style("opacity", 0.5)
+          .on("mouseover", highlight)
+          .on("mouseleave", doNotHighlight)
+  
+        // Draw the axis:
+        svg.selectAll("myAxis")
+          // For each dimension of the dataset I add a 'g' element:
+          .data(dimensions.map(d => d.name)).enter()
+          .append("g")
+          .attr("class", "axis")
+          // I translate this element to its right position on the x axis
+          .attr("transform", function (d) { return "translate(" + x(d) + ")"; })
+          // And I build the axis with the call function
+          .each(function (d) { d3.select(this).call(d3.axisLeft().ticks(5).scale(y[d])); })
+          // Add axis title
+          .append("text")
+          .style("text-anchor", "middle")
+          .attr("y", -9)
+          .text(function (d) { return d; })
+          .style("fill", "black")
+
+        var svg = d3.select("#legendLinear").append("svg")
+
+        svg
+          .append("g")
+          .attr("class", function (d) { return "legendOrdinal "})
+          .attr("transform", "translate(20,20)");
+
+
+
+        var legendOrdinal = d3.legendColor()
+          //d3 symbol creates a path-string, for example
+          //"M0,-8.059274488676564L9.306048591020996,
+          //8.059274488676564 -9.306048591020996,8.059274488676564Z"
+          .shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
+          .shapePadding(10)
+          //use cellFilter to hide the "e" cell
+          .cellFilter(function (d) { return d.label !== "e" })
+          .scale(color)
+          .on("cellover", function(d){ 
+            let selected_specie = d;
+              d3.selectAll(".line")
+                .transition().duration(200)
+                .style("stroke", "lightgrey")
+                .style("opacity", "0.2")
+              // Secondly the clicked specie takes its color
+              d3.selectAll("." + selected_specie)
+                .transition().duration(200)
+                .style("stroke", color(selected_specie))
+                .style("opacity", "1")})
+          .on("cellout", function(d) {
+              let obj = d3.selectAll(".line")
+              d3.selectAll(".line")
+                  .transition().duration(200).delay(1000)
+                  .style("stroke", function (data) { return color(data.Species)})
+                  .style("opacity", "1")
+          })
+
+        
+        svg.select(".legendOrdinal")
+          .call(legendOrdinal);
+      }
+      let dimensions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 'Species', 'id'];
+      dimensions = dimensions.slice(0, 20)
+      
+      dimensions = dimensions.map((d, index) => {
+          return {
+            name: index.toString(),
+            min: 0,
+            max: 10,
+          }
+      })
+      let datas = [[1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 2.0, 2.0, 0.0, 2.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, 0.0, 0.0, 23, 110], [1.0, 0.0, 1.0, 2.0, 0.0, 1.0, 1.0, 2.0, 0.0, 4.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 2.0, 2.0, 2.0, 2.0, 86, 190], [1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 2.0, 2.0, 1.0, 0.0, 0.0, 0.0, 2.0, 2.0, 0.0, 2.0, 1.0, 1.0, 0.0, 0.0, 22, 275], [1.0, 0.0, 0.0, 2.0, 0.0, 1.0, 1.0, 5.0, 1.0, 2.0, 1.0, 2.0, 3.0, 0.0, 2.0, 1.0, 0.0, 2.0, 1.0, 1.0, 14, 343], [1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 3.0, 2.0, 2.0, 0.0, 1.0, 1.0, 0.0, 2.0, 1.0, 2.0, 0.0, 2.0, 1.0, 1.0, 80, 439]]
+      datas = datas.map((row, index) => {
+        let obj = {}
+        for (let j = 0; j < row.length - 2; j++) {
+          obj[dimensions[j].name] = row[j]
+        }
+        let len = row.length
+        obj.Species = 'speice' + row[len - 2].toString()
+        obj.id = row[len -1]
+        return obj
+      })
+      parallel_plot(datas, dimensions);
+  </script>
+</body>
+
+</html>
