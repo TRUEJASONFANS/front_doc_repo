@@ -64,7 +64,7 @@ typings/
 .vuepress/dist
 
 src/.vuepress/dist/
-src/.vuepress/public
+
 
 # dist build
 docs/front

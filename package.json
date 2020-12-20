@@ -6,7 +6,7 @@
     "start": "npm run dev"
   },
   "devDependencies": {
-    "vuepress": "^1.0.0-rc.1"
+    "vuepress": "^1.7.1"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0"
