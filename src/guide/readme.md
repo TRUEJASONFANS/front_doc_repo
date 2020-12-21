@@ -14,7 +14,8 @@
    因为直接安装于系统环境， 通常被称为javascript server， 它具有系统API访问权限 例如IO.
 
 ## SPA 前端开发流程图
-![流程图](https://user-images.githubusercontent.com/5670289/59024459-85997c80-8884-11e9-8b6a-532ea61ca3fd.jpg)
+<img :src="$withBase('/react_development_flow.jpg')" alt="react开发流程图">
+
 
 
 
