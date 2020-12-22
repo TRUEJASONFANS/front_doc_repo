@@ -38,6 +38,10 @@ module.exports = {
             {
               title: "react query",
               path: "react/react_query"
+            },
+            {
+              title: "create react app",
+              path: "react/create_react_app.md"
             }
           ]
         }
