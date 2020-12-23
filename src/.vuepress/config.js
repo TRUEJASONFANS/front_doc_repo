@@ -25,6 +25,10 @@ module.exports = {
             "packageManager",
             "packager/",
             "compiler",
+            {
+              title: "create react app",
+              path: "react/create_react_app.md"
+            },
             "packager/others",
             "unit_test",
             "canvas_doc/",
@@ -35,14 +39,6 @@ module.exports = {
               title: "react进阶",
               path: "react/react2"
             },
-            {
-              title: "react query",
-              path: "react/react_query"
-            },
-            {
-              title: "create react app",
-              path: "react/create_react_app.md"
-            }
           ]
         }
       ],
