@@ -13,8 +13,8 @@
    javascript 运行时， 类似于javas 虚拟机, python binary, 可以直接执行javascript 代码。
    因为直接安装于系统环境， 通常被称为javascript server， 它具有系统API访问权限 例如IO.
 
-## SPA 前端开发流程图
-<img :src="$withBase('/react_development_flow.jpg')" alt="react开发流程图">
+<!-- ## SPA 前端开发流程图
+<img :src="$withBase('/react_development_flow.jpg')" alt="react开发流程图"> -->
 
 
 

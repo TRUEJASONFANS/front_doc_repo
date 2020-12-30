@@ -25,6 +25,10 @@ module.exports = {
             "packageManager",
             "packager/",
             "compiler",
+            {
+              title: "create react app",
+              path: "react/create_react_app.md"
+            },
             "packager/others",
             "unit_test",
             "canvas_doc/",
