@@ -41,7 +41,7 @@ module.exports = {
             },
             {
               title: "react query",
-              path: "react/react_query"
+              path: "react/react_query.md"
             },
             {
               title: "create react app",

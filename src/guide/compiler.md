@@ -1,6 +1,3 @@
----
-next: ../react/react_query
----
 # 编译器Babel
 
 ## 背景
