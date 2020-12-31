@@ -48,7 +48,7 @@ module.exports = {
               path: "react/create_react_app.md"
             }, 
             {
-              title: "Generl",
+              title: "General",
               path: "general/https.md"
             }
           ]
