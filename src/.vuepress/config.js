@@ -4,6 +4,17 @@ module.exports = {
   port:"80",
   base:"/front/",
   dest:"docs/front",
+  plugins: [
+    [
+     'vuepress-plugin-zhxie-utterances',
+      {
+        repo: 'TRUEJASONFANS/front_doc_repo',
+        theme: 'github-light',
+        issueTerm: 'pathname',
+        service: 'beaudar',
+      }
+    ]
+  ],
   themeConfig: {
     repo: "TRUEJASONFANS/front_doc_repo",
     lastUpdated: "Last Updated",
@@ -55,5 +66,6 @@ module.exports = {
         }
       ],
     }
-  }
+  },
+
 };
