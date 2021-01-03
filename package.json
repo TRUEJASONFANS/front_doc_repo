@@ -7,7 +7,7 @@
   },
   "devDependencies": {
     "vuepress": "^1.7.1",
-    "vuepress-plugin-zhxie-utterances": "^1.0.9"
+    "vuepress-plugin-zhxie-utterances": "^1.0.10"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0"
