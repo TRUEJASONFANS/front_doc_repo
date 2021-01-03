@@ -11,7 +11,6 @@ module.exports = {
         repo: 'TRUEJASONFANS/front_doc_repo',
         theme: 'github-light',
         issueTerm: 'pathname',
-        service: 'beaudar',
       }
     ]
   ],
