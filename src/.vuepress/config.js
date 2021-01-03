@@ -37,7 +37,7 @@ module.exports = {
             "packager/",
             "compiler",
             {
-              title: "create react app",
+              title: "Create react app",
               path: "react/create_react_app.md"
             },
             "packager/others",
@@ -47,15 +47,15 @@ module.exports = {
             "umi/",
             "react/",
             {
-              title: "react进阶",
+              title: "React进阶",
               path: "react/react2"
             },
             {
-              title: "react query",
+              title: "React query",
               path: "react/react_query.md"
             },
             {
-              title: "create react app",
+              title: "Rreate react app",
               path: "react/create_react_app.md"
             }, 
             {
