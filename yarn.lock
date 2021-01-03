@@ -7865,10 +7865,10 @@ vuepress-plugin-smooth-scroll@^0.0.3:
   dependencies:
     smoothscroll-polyfill "^0.4.3"
 
-vuepress-plugin-zhxie-utterances@^1.0.8:
-  version "1.0.8"
-  resolved "https://registry.npmjs.org/vuepress-plugin-zhxie-utterances/-/vuepress-plugin-zhxie-utterances-1.0.8.tgz#92b419687b946512a29b2831c7edf323db7c90df"
-  integrity sha512-wTaA0cbPWyhK+VvxNSexzAjPhENzKOL5btE1EIIp/ErXZzAyL2BnPmTcXC3pM3pAtejiO3QMRKXYHYoy/IG0aw==
+vuepress-plugin-zhxie-utterances@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.npmjs.org/vuepress-plugin-zhxie-utterances/-/vuepress-plugin-zhxie-utterances-1.0.9.tgz#ebfdf1ce8661810e245cbe6ab90eaf91ebaed30d"
+  integrity sha512-psGR+e0JwcUScmjIxXQwXHg/tKi+YkxcFt/3qSNb3m/6ZW+ojBzLL84wgVSgOamnaWaqkEsZ3EAvvUdM14qIxw==
 
 vuepress@^1.7.1:
   version "1.7.1"
