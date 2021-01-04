@@ -40,7 +40,8 @@ function drawRect(){
     <rect-example/>
 </ClientOnly>
 * 绘制路径
-```
+  
+```javascript
 function drawLine(){
     var canvas = document.getElementById('tutorial');
     if (!canvas.getContext) return;
@@ -72,7 +73,7 @@ function drawTriangle(){
 ## 贝塞尔曲线
 
 * 二次贝塞尔曲线: 由两个锚点和一个控制点组成quadraticCruveTo(double cpx, double cpy, double x, double y)
-```
+```javascript
 function draw(){
     var canvas = document.getElementById('tutorial');
     if (!canvas.getContext) return;
@@ -94,7 +95,7 @@ function draw(){
 }
 ```
 * 三次方贝塞尔曲线：创建一条代表三次方贝塞尔曲线的路径. bezierCurveTo(double cpx, double cpy, double cp2x, double cp2y, double x, double y)
-```
+```javascript
 function draw(){
     var canvas = document.getElementById('tutorial');
     if (!canvas.getContext) return;
@@ -124,7 +125,7 @@ draw();
 </ClientOnly>
 
 ## 绘制文本
-```
+```javascript
 var ctx;
 function draw(){
     var canvas = document.getElementById('tutorial');
