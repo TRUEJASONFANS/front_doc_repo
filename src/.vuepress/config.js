@@ -4,6 +4,16 @@ module.exports = {
   port:"80",
   base:"/front/",
   dest:"docs/front",
+  plugins: [
+    [
+     'vuepress-plugin-zhxie-utterances',
+      {
+        repo: 'TRUEJASONFANS/front_doc_repo',
+        theme: 'github-light',
+        issueTerm: 'pathname',
+      }
+    ]
+  ],
   themeConfig: {
     repo: "TRUEJASONFANS/front_doc_repo",
     lastUpdated: "Last Updated",
@@ -25,6 +35,10 @@ module.exports = {
             "packageManager",
             "packager/",
             "compiler",
+            {
+              title: "Create react app",
+              path: "react/create_react_app.md"
+            },
             "packager/others",
             "unit_test",
             "canvas_doc/",
@@ -32,16 +46,25 @@ module.exports = {
             "umi/",
             "react/",
             {
-              title: "react进阶",
+              title: "React进阶",
               path: "react/react2"
             },
             {
-              title: "react query",
-              path: "react/react_query"
+              title: "React query",
+              path: "react/react_query.md"
+            },
+            {
+              title: "Rreate react app",
+              path: "react/create_react_app.md"
+            }, 
+            {
+              title: "General",
+              path: "general/https.md"
             }
           ]
         }
       ],
     }
-  }
+  },
+
 };

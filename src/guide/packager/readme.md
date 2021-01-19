@@ -5,16 +5,17 @@ next: ./others
 # 打包器
 ## 什么叫模块化？
 远古时代， 当我们程序还远远未达到工程的量级， 我们程序可能就是一个文件，甚至是几行code。
-比如一个文件的实现的[俄罗斯方块](http://localhost/front/blocks.html)。
+比如一个文件的实现的[俄罗斯方块](http://www.zhongwei.tech/front/blocks.html)。
+[俄罗斯方块](/blocks.html)
 模块化的概念就是用模块化方式去管理，重复利用，优化代码块,从而达到工程的概念。 在js语言被创造出来的初期，它仅仅用于操作页面的一些小脚本工作.
 完全无法胜任复杂的软件工程。随着Web页面越来越来复杂化，js所承担的工作越来越大，所以对js的代码实现模块化管理需求越来越重要和紧急，于是出现需要
 模块化的标准
 
 ## 示例： 以一个html5的游戏为例
-[海底大喂🐟](http://www.zhongwei.tech/front/TinyHeart.html)
+[海底大喂🐟](http://www.zhongwei.tech/TinyHeart.html)
 
 经过模块化打包后的解决方案
-[海底大喂🐟v2](http://www.zhongwei.tech/front/TinyHeart_v2.html)
+[海底大喂🐟v2](http://www.zhongwei.tech/TinyHeart_v2.html)
 
 模块化帮我们解决需要帮我们解决以下几个问题
 - 如何向其他模块导出

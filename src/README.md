@@ -29,5 +29,14 @@ AJAX 技术指的是脚本独立向服务器请求数据，拿到数据以后，
 
 ## SPA阶段
 前端可以做到读写数据、切换视图、用户交互，这意味着，网页其实是一个应用程序，而不是信息的纯展示。这种单张网页的应用程序称为 SPA（single-page application）。
+
+## 前后端分离的两种架构
+
+### SPA 架构图
+<img :src="$withBase('/SPA.png')" alt="SPA">
+
+### SSR 架构图
+<img :src="$withBase('/SSR.jpg')" alt="SSR">
+
 [本文节选自](https://www.yuque.com/ant-design/course/sc1lvc)
 

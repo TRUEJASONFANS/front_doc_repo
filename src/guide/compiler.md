@@ -80,5 +80,10 @@ package.json
 ```
 babel-loader 是一个webpack的一个module插件，让webpack打包时候可以用调用babel进行编译
 babel-preset-react-app 是一个对jsx的babel插件集合预设， 相当于babel的react一整套解决方案.
+
+## 样例
+[babel demo](https://github.com/TRUEJASONFANS/babel_demo)
+
+
 ## 总结
 webpack+babel = java Maven 解决了js编译和模块化打包的两大问题

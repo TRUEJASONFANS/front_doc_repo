@@ -2,7 +2,7 @@ import axios from 'axios';
 // This custom hook centralizes and streamlines handling of HTTP calls 
 
 
-export const TODO_HOST = process.env.NODE_ENV === "production" ? "http://www.zhongwei.tech/todos/api/" : "http://localhost:8081/todos/api/"
+export const TODO_HOST = process.env.NODE_ENV === "production" ? "https://www.zhongwei.tech/todos/api/" : "http://localhost:8081/todos/api/"
 
 export function getTodoList() {
     return axios.get(TODO_HOST + "task").then(response => response.data);

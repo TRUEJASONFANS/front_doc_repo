@@ -3,7 +3,7 @@ sidebar: auto
 next: ./react_query.md
 ---
 
-# react 进阶
+# React 进阶
 
 ## 三大周期
 Mounting：已插入真实 DOM
