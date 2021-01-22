@@ -1203,6 +1203,11 @@
     url-loader "^4.1.1"
     webpack "^4.44.1"
 
+"@docusaurus/module-type-aliases@^2.0.0-alpha.70":
+  version "2.0.0-alpha.70"
+  resolved "https://registry.npm.taobao.org/@docusaurus/module-type-aliases/download/@docusaurus/module-type-aliases-2.0.0-alpha.70.tgz#2e50770c54cb465302d0a779fb76c163a1fc94e2"
+  integrity sha1-LlB3DFTLRlMC0Kd5+3bBY6H8lOI=
+
 "@docusaurus/plugin-content-blog@2.0.0-alpha.70":
   version "2.0.0-alpha.70"
   resolved "https://registry.npm.taobao.org/@docusaurus/plugin-content-blog/download/@docusaurus/plugin-content-blog-2.0.0-alpha.70.tgz#795a5ddf181dfb314873a5dc33010d1a5bd94d28"
@@ -1643,6 +1648,11 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@tsconfig/docusaurus@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npm.taobao.org/@tsconfig/docusaurus/download/@tsconfig/docusaurus-1.0.2.tgz#400ef146d3e7da2f78bf9749c943d123dce5fd97"
+  integrity sha1-QA7xRtPn2i94v5dJyUPRI9zl/Zc=
+
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.npm.taobao.org/@types/anymatch/download/@types/anymatch-1.3.1.tgz?cache=0&sync_timestamp=1605052234352&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fanymatch%2Fdownload%2F%40types%2Fanymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"
@@ -1662,6 +1672,11 @@
   integrity sha1-sWhy8qYUTHAl8pb7ljamZ+u3nNk=
   dependencies:
     "@types/unist" "*"
+
+"@types/history@*":
+  version "4.7.8"
+  resolved "https://registry.npm.taobao.org/@types/history/download/@types/history-4.7.8.tgz#49348387983075705fe8f4e02fb67f7daaec4934"
+  integrity sha1-STSDh5gwdXBf6PTgL7Z/farsSTQ=
 
 "@types/html-minifier-terser@^5.0.0":
   version "5.1.1"
@@ -1710,6 +1725,30 @@
   resolved "https://registry.npm.taobao.org/@types/q/download/@types/q-1.5.4.tgz?cache=0&sync_timestamp=1605055213197&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fq%2Fdownload%2F%40types%2Fq-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha1-FZJUFOCtLNdlv+9YhC9+JqesyyQ=
 
+"@types/react-helmet@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.npm.taobao.org/@types/react-helmet/download/@types/react-helmet-6.1.0.tgz#af586ed685f4905e2adc7462d1d65ace52beee7a"
+  integrity sha1-r1hu1oX0kF4q3HRi0dZazlK+7no=
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-router-dom@^5.1.7":
+  version "5.1.7"
+  resolved "https://registry.npm.taobao.org/@types/react-router-dom/download/@types/react-router-dom-5.1.7.tgz#a126d9ea76079ffbbdb0d9225073eb5797ab7271"
+  integrity sha1-oSbZ6nYHn/u9sNkiUHPrV5ercnE=
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+    "@types/react-router" "*"
+
+"@types/react-router@*":
+  version "5.1.11"
+  resolved "https://registry.npm.taobao.org/@types/react-router/download/@types/react-router-5.1.11.tgz#b01ce4cb21bf7d6b32edc862fc1e2c0088044b5b"
+  integrity sha1-sBzkyyG/fWsy7chi/B4sAIgES1s=
+  dependencies:
+    "@types/history" "*"
+    "@types/react" "*"
+
 "@types/react-toggle@^4.0.2":
   version "4.0.2"
   resolved "https://registry.npm.taobao.org/@types/react-toggle/download/@types/react-toggle-4.0.2.tgz#46ffa5af1a55de5f25d0aa78ef0b557b5c8bf276"
@@ -1720,6 +1759,14 @@
 "@types/react@*":
   version "17.0.0"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-17.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-17.0.0.tgz#5af3eb7fad2807092f0046a1302b7823e27919b8"
+  integrity sha1-WvPrf60oBwkvAEahMCt4I+J5Gbg=
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
+
+"@types/react@^17.0.0":
+  version "17.0.0"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-17.0.0.tgz#5af3eb7fad2807092f0046a1302b7823e27919b8"
   integrity sha1-WvPrf60oBwkvAEahMCt4I+J5Gbg=
   dependencies:
     "@types/prop-types" "*"
@@ -9578,6 +9625,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@^4.1.3:
+  version "4.1.3"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-4.1.3.tgz?cache=0&sync_timestamp=1611132858970&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-4.1.3.tgz#519d582bd94cba0cf8934c7d8e8467e473f53bb7"
+  integrity sha1-UZ1YK9lMugz4k0x9joRn5HP1O7c=
 
 ua-parser-js@^0.7.18:
   version "0.7.23"
