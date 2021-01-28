@@ -43,3 +43,6 @@ Embeded binary
 ## Token vs Session
 1. Token 更好的支持移动端，以及对浏览器的兼容性更好
 2. Token 无需查询数据库， 效率更好，只需解密你的签名即可
+
+
+[https://zhuanlan.zhihu.com/p/301063931](spring boot flow)
