@@ -25,6 +25,12 @@
 |异步| Completable doSomething()  | Single<T> getData()| Observable<T> getData|
 
 
+### flatMap
+
+1. flatMap 本质是先map 再merge
+2. flatMap vs concatMap  concatMap 本质上等于flatMap(f, maxConcurrent), maxConcurrent = 1
+
+
 # C10K
 ### 测试工具wrk, Gatting
 
