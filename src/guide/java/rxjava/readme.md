@@ -31,6 +31,27 @@
 2. flatMap vs concatMap  concatMap 本质上等于flatMap(f, maxConcurrent), maxConcurrent = 1
 
 
+## 多个observable
+
+1. 使用merge 将多个Observable 合并为1个
+2. 相同频率: 使用zip 和 zipWith() 进行成对 合并
+3. 流之间不同步的情况：
+    1. combineLatest(ob1, ob2, (ob1, ob2) => merged ob3) 不区分ob1, ob2
+    2. withLatestFrom() slow.withLastestFrom(fast) fast 为辅助流 
+    3. a.amb() 
+4. 累计事件
+    1. scan() 关注中间结果， 类如推土机， 10， 14, 12, 13 ,14, 16 => 10, 24, 36, 49, 63, 79 (add)
+    2. reduce()基本上只接收最后一个元素的scan(), reduce()其实就是扫描整个Observable，但是丢弃了除最后一个元素之外的其他所有元素
+5. 切片
+    1. skip(n) vs take(n) skip是跳过n个事件， take是只拿当前多少前n个事件
+    2. takeWhile()
+
+5. merge vs concat vs switchOnNext()
+   1. merge 合并时间流 相当于同时订阅
+   2. concat  订阅完第一个 再接这订阅下一个
+   3. swtichOnNext  订阅下一个的时候抛弃上一事件源
+
+
 # C10K
 ### 测试工具wrk, Gatting
 
