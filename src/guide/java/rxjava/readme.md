@@ -58,9 +58,28 @@
 
 
 
-# C10K
+## C10K
 ### 测试工具wrk, Gatting
 
 ``` shell
 wrk -t6 -c10000 -d60s --timeout 10s --latency http://server:8000
 ```
+
+## 流控制
+1. 采样：obs.sample(1, SECONDS) 时间段取样
+   obs.sample(Observable.interval(1, SECONDS))
+2. 节流：
+    1. buffer 窗口控制 产生批处理集合事件， 会缓冲区间内的所有event. Returns an Observable that emits buffers of items it collects from the source ObservableSource
+    2. window 也可以窗口控制, 但是不是直接缓冲，类似于buffer缓存一个list集合，区别在于window将这个结果集合封装成了observable
+
+## 回压
+1. observeOn(), from, range, fromCallable 对回压友好
+2. 避免使用Observable.create和手动发布事件，如果必须自己实现Observable,使用支持回压功能的工厂方法.
+
+
+## 异常处理
+1. onErrorReturn 替换另一个值
+2. onErrorResumeNext 替换为另一个流
+3. 避免使用onError, 因为将终止时间流， 可以使用retry(), doOnError().retry()
+
+
