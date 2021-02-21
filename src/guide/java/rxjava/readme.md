@@ -51,6 +51,12 @@
    2. concat  订阅完第一个 再接这订阅下一个
    3. swtichOnNext  订阅下一个的时候抛弃上一事件源
 
+## 运用反应式至现在程序中
+### RxJava 多线程
+1. subscribeOn 确定onSubscribe回调方法的调用线程.  在该subscribeOn之前到前observeOn之间
+2. observeOn 哪个schedular触发下游的Subscriber, 在observeOn之后的，都会有该shedular运行
+
+
 
 ## C10K
 ### 测试工具wrk, Gatting
