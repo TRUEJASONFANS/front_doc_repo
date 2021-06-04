@@ -1,6 +1,4 @@
----
-sidebar: auto
----
+
 # Create-react-app
 前面我们讲了这么多关于工具链的组成， 那我们对于我们开发人员需要十分了解她们才能开发JS渲染的 GUI 吗？ 答案是不需要， create-react-app binary 会帮我们打造好开发一个react app的默认
 系列配置。[Create React App](https://create-react-app.bootcss.com/)
