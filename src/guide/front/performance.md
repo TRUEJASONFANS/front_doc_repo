@@ -1,43 +1,43 @@
-# 前端性能优化原理与实践
+# Front-end performance optimization principle and practice
 
-老生常谈， 让我们从一个前端经典的"问题".
+As the old saying goes, let us start with a classic "problem" from the front end.
 
-## 从输入 URL 到页面加载完成，发生了什么？
+## From entering the URL to the page loading, what happened?
 
-站在性能优化的角度， 首选我们用DNS 将 URL　解析成IP地址，然后与IP地址确定的那台服务器建立TCP连接，
-随后我们向服务端抛出我们的http请求，服务端处理完我们的请求后，把目标数据放在http响应里返回给客户端，
-客户端浏览器拿到响应的数据后就可以走一个渲染的流程，页面便这样呈现给了用户。
-更细节的分类
+From the perspective of performance optimization, we first use DNS to resolve the URL into an IP address, and then establish a TCP connection with the server identified by the IP address.
+Then we throw our http request to the server. After the server processes our request, it puts the target data in the http response and returns it to the client.
+After the client browser gets the response data, it can go through a rendering process, and the page is presented to the user in this way.
+More detailed classification
 
-1. DNS 解析
-2. TCP 连接
-3. HTTP 请求抛出
-4. 服务端处理请求，HTTP 响应返回
-5. 浏览器拿到响应数据，解析响应内容，把解析的结果展示(渲染)给用户
+1. DNS resolution
+2. TCP connection
+3. HTTP request throws
+4. The server processes the request and the HTTP response is returned
+5. The browser gets the response data, parses the response content, and displays (renders) the result of the analysis to the user
 
-我们任何一个用户端的产品，都需要把这 5 个过程滴水不漏地考虑到自己的性能优化方案内、反复权衡，从而打磨出用户满意的速度。
+For any of our user-side products, we need to take these 5 processes into our own performance optimization plan without fail, and repeatedly weigh them, so as to polish the speed that users are satisfied with.
 
-## 总的来说，我们将从网络层面和渲染层面两个大的维度来逐个点亮前端性能优化的技能树
+**In general, we will light up the skill tree for front-end performance optimization from two major dimensions: the network level and the rendering level**.
 
-![优化flow](./优化flow.png)
+![Optimize flow](./优化flow.png)
 
-对于 DNS 解析和 TCP 连接两个步骤，我们前端可以做的努力非常有限。相比之下，HTTP 连接这一层面的优化才是我们网络优化的核心。因此我们开门见山，抓主要矛盾，直接从 HTTP 开始讲起。
+For the two steps of DNS resolution and TCP connection, front-end's impact is very limited. In contrast, the optimization of the HTTP connection level is the core of our network optimization. So we are straight to the point, grasping the main contradiction, and starting directly from HTTP.
 
-HTTP 优化有两个大的方向：
+HTTP optimization has two major directions:
 
-* 减少请求次数
-* 减少单次请求所花费的时间
+* Reduce the number of requests
+* Reduce the time spent on a single request
 
-### webpack 优化
+## webpack optimization
 
-webpack 的优化瓶颈，主要是两个方面：
+The optimization bottleneck of webpack is mainly in two aspects:
 
-1. webpack 的构建过程太花时间
-2. webpack 打包的结果体积太大
+1. The webpack build process takes too much time
+2. The result of webpack packaging is too big
 
-#### 构建过程提速策略
+### **Speeding up the construction process**
 
-1. 不要让 loader 做太多事情——以 babel-loader 为例
+1. Don't let loader do too many things-> take babel-loader as an example(filter node_modules)
 
 ```javascript
 module: {
@@ -46,7 +46,7 @@ module: {
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
       use: {
-        loader: 'babel-loader',
+        loader:'babel-loader',
         options: {
           presets: ['@babel/preset-env']
         }
@@ -55,20 +55,20 @@ module: {
   ]
 }
 ```
-2. 优化第三方库构建(避免重复打包引用的第三方库)
+2. Optimize the construction of third-party libraries (avoid repeated packaging and reference of third-party libraries)
 
-DllPlugin 是基于 Windows 动态链接库（dll）的思想被创作出来的。这个插件会把第三方库单独打包到一个文件中，这个文件就是一个单纯的依赖库。这个依赖库不会跟着你的业务代码一起被重新打包，只有当依赖自身发生版本变化时才会重新打包。
+DllPlugin is created based on the idea of ​​Windows dynamic link library (dll). This plug-in will package the third-party library separately into a file, which is a purely dependent library. This dependency library will not be repackaged along with your business code, and will only be repackaged when the version of the dependency itself changes.
 
-用 DllPlugin 处理文件，要分两步走：
+To process files with DllPlugin, there are two steps:
 
-基于 dll 专属的配置文件，打包 dll 库
+Based on the following dll exclusive configuration js file, package the third-party library into dll
 ```js
 const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
     entry: {
-      // 依赖的库数组
+      // Dependent library array
       vendor: [
         'prop-types',
         'babel-polyfill',
@@ -78,100 +78,100 @@ module.exports = {
       ]
     },
     output: {
-      path: path.join(__dirname, 'dist'),
-      filename: '[name].js',
-      library: '[name]_[hash]',
+      path: path.join(__dirname,'dist'),
+      filename:'[name].js',
+      library:'[name]_[hash]',
     },
     plugins: [
       new webpack.DllPlugin({
-        // DllPlugin的name属性需要和libary保持一致
-        name: '[name]_[hash]',
-        path: path.join(__dirname, 'dist', '[name]-manifest.json'),
-        // context需要和webpack.config.js保持一致
+        // The name attribute of DllPlugin needs to be consistent with libary
+        name:'[name]_[hash]',
+        path: path.join(__dirname,'dist','[name]-manifest.json'),
+        // context needs to be consistent with webpack.config.js
         context: __dirname,
       }),
     ],
 }
 ```
-我们的 dist 文件夹里会出现这样两个文件 vendor.js 不必解释，是我们第三方库打包的结果。这个多出来的 vendor-manifest.json，则用于描述每个第三方库对应的具体路径.
-随后，我们只需在 webpack.config.js 里针对 dll 稍作配置：
+There will be two such files vendor.js in our dist folder, without explanation, it is the result of our third-party library packaging. This extra vendor-manifest.json is used to describe the specific path corresponding to each third-party library.
+Then, we only need to configure the dll slightly in webpack.config.js:
 
-基于 webpack.config.js 文件，打包业务代码
+Based on webpack.config.js file, package business code
 ```js
 const path = require('path');
 const webpack = require('webpack')
 module.exports = {
-  mode: 'production',
-  // 编译入口
+  mode:'production',
+  // compile entry
   entry: {
-    main: './src/index.js'
+    main:'./src/index.js'
   },
-  // 目标文件
+  // target document
   output: {
-    path: path.join(__dirname, 'dist/'),
-    filename: '[name].js'
+    path: path.join(__dirname,'dist/'),
+    filename:'[name].js'
   },
-  // dll相关配置
+  // dll related configuration
   plugins: [
     new webpack.DllReferencePlugin({
       context: __dirname,
-      // manifest就是我们第一步中打包出来的json文件
+      // manifest is the json file that we packaged in the first step
       manifest: require('./dist/vendor-manifest.json'),
     })
   ]
 }
 ```
 
-构建结果体积压缩
+### **Build result volume compression**
 
-1. 删除冗余代码:UglifyJsPlugin 插件
+1. Remove redundant code: UglifyJsPlugin plugin
 
 ```js
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
  plugins: [
    new UglifyJsPlugin({
-     // 允许并发
+     // Allow concurrency
      parallel: true,
-     // 开启缓存
+     // Turn on the cache
      cache: true,
      compress: {
-       // 删除所有的console语句    
+       // delete all console statements
        drop_console: true,
-       // 把使用多次的静态值自动定义为变量
+       // Automatically define static values ​​that are used multiple times as variables
        reduce_vars: true,
      },
      output: {
-       // 不保留注释
+       // Do not keep comments
        comment: false,
-       // 使输出的代码尽可能紧凑
+       // Make the output code as compact as possible
        beautify: false
      }
    })
  ]
 }
 ```
-2. 拆分资源
-3. 按需加载
-4. Gzip 压缩 极致压缩请求数据的大小
+2. Split resources
+3. Load on demand
+4. Gzip compression Extremely compress the size of the requested data
 
-### gzip 优化(www.zhongwei.tech)
+## **gzip optimization (www.zhongwei.tech)**
 
-HTTP 压缩是一种内置到网页服务器和网页客户端中以改进传输速度和带宽利用率的方式。在使用 HTTP 压缩的情况下，HTTP 数据在从服务器发送前就已压缩：兼容的浏览器将在下载所需的格式前宣告支持何种方法给服务器；不支持压缩方法的浏览器将下载未经压缩的数据。最常见的压缩方案包括 Gzip 和 Deflate。
+HTTP compression is a method built into web servers and web clients to improve transmission speed and bandwidth utilization. In the case of HTTP compression, the HTTP data is compressed before it is sent from the server: compatible browsers will announce which methods are supported to the server before downloading the required format; browsers that do not support the compression method will download Compressed data. The most common compression schemes include Gzip and Deflate.
 
-HTTP 压缩就是以缩小体积为目的，对 HTTP 内容进行重新编码的过程
-Gzip 的内核就是 Deflate，目前我们压缩文件用得最多的就是 Gzip。可以说，Gzip 就是 HTTP 压缩的经典例题。
+HTTP compression is the process of re-encoding HTTP content for the purpose of reducing the size
+The core of Gzip is Deflate, and Gzip is the one we use most for compressing files. It can be said that Gzip is a classic example of HTTP compression.
 
-通过nginx搭建的静态资源服务器， 天然支持配置gzip, 只需根据以下配置即可开启gzip压缩
+The static resource server built by nginx naturally supports the configuration of gzip. You only need to enable gzip compression according to the following configuration
 
-nginx 配置
+nginx configuration
 ```
-gzip  on;
+gzip on;
 gzip_min_length 1k;
 gzip_buffers 4 16k;
 gzip_http_version 1.0;
 gzip_comp_level 2;
-gzip_types text/plain application/javascript application/css  text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+gzip_types text/plain application/javascript application/css text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
 gzip_vary off;
 gzip_disable "MSIE [1-6]\.";
 ```
@@ -181,32 +181,32 @@ Before
 After
 1.4MB transfered 693 kB transferred
 
-## 图片优化
-就图片这块来说，与其说我们是在做“优化”，不如说我们是在做“权衡”。因为我们要做的事情，就是去压缩图片的体积（或者一开始就选取体积较小的图片格式）。但这个优化操作，是以牺牲一部分成像质量为代价的。因此我们的主要任务，是尽可能地去寻求一个质量与性能之间的平衡点。
-1. JPEG/JPG 关键字：有损压缩、体积小、加载快、不支持透明 JPG 适用于呈现色彩丰富的图片，在我们日常开发中，JPG 图片经常作为大的背景图、轮播图或 Banner 图出现。
-缺点： 有损压缩在轮播图上确实很难露出马脚，但当它处理矢量图形和 Logo 等线条感较强、颜色对比强烈的图像时，人为压缩导致的图片模糊会相当明显。此外，JPEG 图像不支持透明度处理，透明图片需要召唤 PNG 来呈现
-2. PNG-8 与 PNG-24 无损压缩、质量高、体积大、支持透明。PNG 图片具有比 JPG 更强的色彩表现力，对线条的处理更加细腻，对透明度有良好的支持。它弥补了上文我们提到的 JPG 的局限性，唯一的 BUG 就是体积太大。
-3. SVG 文本文件、体积小、不失真、兼容性好
-4. Base64 关键字：文本文件、依赖编码、小图标解决方案
-Base64 是一种用于传输 8Bit 字节码的编码方式，通过对图片进行 Base64 编码，我们可以直接将编码结果写入 HTML 或者写入 CSS，从而减少 HTTP 请求的次数。
-5. webP WebP 是今天在座各类图片格式中最年轻的一位，它于 2010 年被提出， 是 Google 专为 Web 开发的一种旨在加快图片加载速度的图片格式，它支持有损压缩和无损压缩。WebP 像 JPEG 一样对细节丰富的图片信手拈来，像 PNG 一样支持透明，像 GIF 一样可以显示动态图片——它集多种图片文件格式的优点于一身。局限：需要高版本浏览器支持
+## **Picture optimization**
+As far as the picture is concerned, we are not so much doing "optimization" as we are doing "weighing". Because what we have to do is to compress the size of the picture (or choose a smaller picture format from the beginning). But this optimization operation comes at the expense of a part of the imaging quality. Therefore, our main task is to find a balance between quality and performance as much as possible.
+1. **JPEG/JPG** keywords: lossy compression, small size, fast loading, transparent JPG is suitable for presenting colorful pictures, in our daily development, JPG pictures are often used as large background pictures, carousel pictures or banners The graph appears.
+Disadvantages: Lossy compression is really difficult to show off on the carousel, but when it processes images with strong lines and strong color contrasts such as vector graphics and logos, the image blur caused by artificial compression will be quite obvious. In addition, JPEG images do not support transparency processing, transparent images need to call PNG to render
+2. **PNG-8 and PNG-24** lossless compression, high quality, large volume, support transparency. PNG images have stronger color expression than JPG, the processing of lines is more delicate, and there is good support for transparency. It makes up for the limitations of JPG we mentioned above, the only bug is that it is too large.
+3. **SVG** text file, small size, no distortion, good compatibility
+4. **Base64** keywords: text files, dependent coding, small icon solutions
+Base64 is an encoding method used to transmit 8Bit bytecode. By Base64 encoding an image, we can directly write the encoding result into HTML or CSS, thereby reducing the number of HTTP requests.
+5. **webP** WebP is the youngest among all kinds of picture formats in the audience today. It was proposed in 2010. It is a picture format developed by Google for the Web designed to speed up the loading of pictures. It supports lossy compression and lossless compression. WebP is as easy as JPEG for detailed pictures, it supports transparency like PNG, and can display dynamic pictures like GIF-it combines the advantages of multiple image file formats in one. Limitations: need high version browser support
 
 
-## 浏览器缓存机制介绍与缓存策略剖析
+## **Browser caching mechanism introduction and caching strategy analysis**
 
-- MemoryCache
-1. 内存缓存是快的，也是“短命”的。它和渲染进程“生死相依”，当进程结束后，也就是 tab 关闭以后，内存里的数据也将不复存在。资源存不存内存，浏览器秉承的是“节约原则”， 较小的资源才才入内存
+1. **MemoryCache**
+The memory cache is fast and "short-lived". It is "dependent on life and death" with the rendering process. When the process ends, that is, after the tab is closed, the data in the memory will no longer exist. Whether resources are stored in memory or not, browsers adhere to the "saving principle", and only smaller resources can be stored in memory
 
-2. Service Worker Cache
-Service Worker 是一种独立于主线程之外的 Javascript 线程。它脱离于浏览器窗体，因此无法直接访问 DOM。这样独立的个性使得 Service Worker 的“个人行为”无法干扰页面的性能，这个“幕后工作者”可以帮我们实现离线缓存、消息推送和网络代理等功能。我们借助 Service worker 实现的离线缓存就称为 Service Worker Cache。
+2. **Service Worker Cache**
+Service Worker is a Javascript thread independent of the main thread. It is separated from the browser window and therefore cannot directly access the DOM. This independent personality makes the service worker's "personal behavior" unable to interfere with the performance of the page. This "behind-the-scenes worker" can help us implement offline caching, message push and network proxy functions. The offline cache we implemented with the help of Service worker is called Service Worker Cache.
 
-### http 缓存
-强缓存
+### http cache
+Strong cache
 1. Expire
 2. Cache-Control
 
 ![强缓存](./强缓存命中.png)
-expires 允许我们通过绝对的时间戳来控制缓存过期时间，相应地，Cache-Control 中的max-age 字段也允许我们通过设定相对的时间长度来达到同样的目的
+Expires allows us to control the cache expiration time through an absolute timestamp. Correspondingly, the max-age field in Cache-Control also allows us to achieve the same goal by setting a relative length of time.
 ```js
 expires: Wed, 11 Sep 2019 16:12:18 GMT
 ```
@@ -214,47 +214,53 @@ expires: Wed, 11 Sep 2019 16:12:18 GMT
 cache-control: max-age=31536000
 ```
 
-#### public 与 private
-public 与 private 是针对资源是否能够被代理服务缓存而存在的一组对立概念。
-如果我们为资源设置了 public，那么它既可以被浏览器缓存，也可以被代理服务器缓存；如果我们设置了 private，则该资源只能被浏览器缓存。private 为默认值。但多数情况下，public 并不需要我们手动设置，比如有很多线上网站的 cache-control 是这样的：
+### public and private
+Public and private are a set of opposite concepts for whether resources can be cached by proxy services.
+If we set public for the resource, it can be cached by the browser or the proxy server; if we set private, the resource can only be cached by the browser. private is the default value. But in most cases, public does not need to be manually set by us. For example, the cache-control of many online websites is like this:
 
-#### no-store与no-cache
-1. no-cache 我们为资源设置了 no-cache 后，每一次发起请求都不会再去询问浏览器的缓存情况，而是直接向服务端去确认该资源是否过期
-2. no-store 顾名思义就是不使用任何缓存策略. 在 no-cache 的基础上，它连服务端的缓存确认也绕开了，只允许你直接向服务端发送请求、并下载完整的响应。
+### no-store and no-cache
+1. no-cache After we set no-cache for the resource, every time we initiate a request, we will not ask about the browser’s cache, but will directly confirm to the server whether the resource has expired.
+2. No-store, as its name implies, does not use any caching strategy. On the basis of no-cache, it bypasses the cache confirmation on the server side, and only allows you to send requests directly to the server side and download the complete response.
 
-#### 协商缓存：浏览器与服务器合作之下的缓存策略
-协商缓存依赖于服务端与浏览器之间的通信。
+### Negotiate caching: the caching strategy under the cooperation of the browser and the server
+Negotiation caching relies on the communication between the server and the browser.
 
-协商缓存机制下，浏览器需要向服务器去询问缓存的相关信息，进而判断是重新发起请求、下载完整的响应，还是从本地获取缓存的资源。
+Under the negotiated caching mechanism, the browser needs to ask the server for related information about the cache, and then determine whether to re-initiate the request, download the complete response, or obtain the cached resource locally.
 
-如果服务端提示缓存资源未改动（Not Modified），资源会被重定向到浏览器缓存，这种情况下网络请求对应的状态码是 304
+If the server prompts that the cached resource has not been modified (Not Modified), the resource will be redirected to the browser cache. In this case, the status code corresponding to the network request is 304
 
 ![304](./304.png)
 
-#### 协商缓存的实现：从 Last-Modified 到 Etag
+### Negotiation cache implementation: from Last-Modified to Etag
 
 1. Last-Modified
-首次请求Response Headers返回：
+The first request for Response Headers returns:
 ```js
 Last-Modified: Fri, 27 Oct 2017 06:35:57 GMT
 ```
-随后我们每次请求时，会带上一个叫 If-Modified-Since 的时间戳字段，它的值正是上一次 response 返回给它的 last-modified 值：
+Every time we request, we will bring a timestamp field called If-Modified-Since, its value is the last-modified value returned to it in the previous response:
 ```js
 If-Modified-Since: Fri, 27 Oct 2017 06:35:57 GMT
 ```
 
-2. 有些情况服务器并没有正确感知文件的变化。为了解决这样的问题，Etag 作为 Last-Modified 的补充出现了。
-Etag 是由服务器为每个资源生成的唯一的标识字符串，这个标识字符串是基于文件内容编码的，只要文件内容不同，它们对应的 Etag 就是不同的，反之亦然。因此 Etag 能够精准地感知文件的变化。
-首次请求Response Headers返回：
+### Last-Modified fallbacks:
+1. We edited the file, but the content of the file has not changed. The server does not know whether we actually changed the file, it still judges by the last editing time. Therefore, when this resource is requested again, it will be treated as a new resource, which will trigger a complete response-when it should not be requested again, it will be requested again.
+
+2. When we modify the file too fast (for example, it took 100ms to complete the change), because If-Modified-Since can only check the time difference in seconds as the smallest unit of measurement, it cannot perceive this change-the When re-requesting, instead of re-requesting.
+
+### Etag 
+In some cases as former said, the server does not correctly sense file changes. In order to solve this problem, Etag appeared as a supplement to Last-Modified.
+Etag is a unique identification string generated by the server for each resource. This identification string is encoded based on the content of the file. As long as the content of the file is different, their corresponding Etag is different, and vice versa. Therefore, Etag can accurately perceive file changes.
+The first request for Response Headers returns:
 ```js
 ETag: W/"2a3b-1602480f459"
 ```
-那么下一次请求时，请求头里就会带上一个值相同的、名为 if-None-Match 的字符串供服务端比对了：
+Then in the next request, a string named if-None-Match with the same value in the request header will be compared by the server:
 ```js
 If-None-Match: W/"2a3b-1602480f459"
 ```
- Etag 在感知文件变化上比 Last-Modified 更加准确，优先级也更高。当 Etag 和 Last-Modified 同时存在时，以 Etag 为准。
+Etag is more accurate than Last-Modified in sensing file changes and has a higher priority. When Etag and Last-Modified exist at the same time, Etag shall prevail.
 
- ### 缓存决策指南
+### Caching Decision Guide
 
- ![cash flow](./cache_flow.png)
+![cash flow](./cache_flow.png)
