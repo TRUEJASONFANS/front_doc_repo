@@ -28,7 +28,6 @@ export default function Post({ post, morePosts, preview }) {
 }
 
 export async function getStaticProps({ params }) {
-  console.log("getStaticProps run")
   const post = getPostBySlug(params.slug, [
     "title",
     "date",
@@ -51,7 +50,6 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  console.log("getStaticPaths run")
   const posts = getAllPosts(["slug"]);
   return {
     paths: posts.map((post) => {
@@ -59,6 +57,7 @@ export async function getStaticPaths() {
         params: {
           slug: post.slug,
         },
+        
       };
     }),
     fallback: false,
