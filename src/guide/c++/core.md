@@ -1485,3 +1485,226 @@ int main() {
 	return 0;
 }
 ```
+4.4 友元
+
+```c++
+class Building
+{
+	//告诉编译器 goodGay全局函数 是 Building类的好朋友，可以访问类中的私有内容
+	friend void goodGay(Building * building);
+
+public:
+
+	Building()
+	{
+		this->m_SittingRoom = "客厅";
+		this->m_BedRoom = "卧室";
+	}
+
+
+public:
+	string m_SittingRoom; //客厅
+
+private:
+	string m_BedRoom; //卧室
+};
+
+
+void goodGay(Building * building)
+{
+	cout << "好基友正在访问： " << building->m_SittingRoom << endl;
+	cout << "好基友正在访问： " << building->m_BedRoom << endl;
+}
+
+
+void test01()
+{
+	Building b;
+	goodGay(&b);
+}
+
+int main(){
+
+	test01();
+
+	system("pause");
+	return 0;
+}
+```
+
+4.5 运算符重载
+```
+class Person {
+public:
+	Person() {};
+	Person(int a, int b)
+	{
+		this->m_A = a;
+		this->m_B = b;
+	}
+	//成员函数实现 + 号运算符重载
+	Person operator+(const Person& p) {
+		Person temp;
+		temp.m_A = this->m_A + p.m_A;
+		temp.m_B = this->m_B + p.m_B;
+		return temp;
+	}
+
+
+public:
+	int m_A;
+	int m_B;
+};
+
+//全局函数实现 + 号运算符重载
+//Person operator+(const Person& p1, const Person& p2) {
+//	Person temp(0, 0);
+//	temp.m_A = p1.m_A + p2.m_A;
+//	temp.m_B = p1.m_B + p2.m_B;
+//	return temp;
+//}
+
+//运算符重载 可以发生函数重载 
+Person operator+(const Person& p2, int val)  
+{
+	Person temp;
+	temp.m_A = p2.m_A + val;
+	temp.m_B = p2.m_B + val;
+	return temp;
+}
+
+void test() {
+
+	Person p1(10, 10);
+	Person p2(20, 20);
+
+	//成员函数方式
+	Person p3 = p2 + p1;  //相当于 p2.operaor+(p1)
+	cout << "mA:" << p3.m_A << " mB:" << p3.m_B << endl;
+
+
+	Person p4 = p3 + 10; //相当于 operator+(p3,10)
+	cout << "mA:" << p4.m_A << " mB:" << p4.m_B << endl;
+
+}
+
+int main() {
+
+	test();
+
+	system("pause");
+
+	return 0;
+}
+
+```
+
+4.6 继承
+```
+//公共页面
+class BasePage
+{
+public:
+	void header()
+	{
+		cout << "首页、公开课、登录、注册...（公共头部）" << endl;
+	}
+
+	void footer()
+	{
+		cout << "帮助中心、交流合作、站内地图...(公共底部)" << endl;
+	}
+	void left()
+	{
+		cout << "Java,Python,C++...(公共分类列表)" << endl;
+	}
+
+};
+
+//Java页面
+class Java : public BasePage
+{
+public:
+	void content()
+	{
+		cout << "JAVA学科视频" << endl;
+	}
+};
+//Python页面
+class Python : public BasePage
+{
+public:
+	void content()
+	{
+		cout << "Python学科视频" << endl;
+	}
+};
+//C++页面
+class CPP : public BasePage
+{
+public:
+	void content()
+	{
+		cout << "C++学科视频" << endl;
+	}
+};
+
+void test01()
+{
+	//Java页面
+	cout << "Java下载视频页面如下： " << endl;
+	Java ja;
+	ja.header();
+	ja.footer();
+	ja.left();
+	ja.content();
+	cout << "--------------------" << endl;
+
+	//Python页面
+	cout << "Python下载视频页面如下： " << endl;
+	Python py;
+	py.header();
+	py.footer();
+	py.left();
+	py.content();
+	cout << "--------------------" << endl;
+
+	//C++页面
+	cout << "C++下载视频页面如下： " << endl;
+	CPP cp;
+	cp.header();
+	cp.footer();
+	cp.left();
+	cp.content();
+
+
+}
+
+int main() {
+
+	test01();
+
+	system("pause");
+
+	return 0;
+}
+
+```
+
+4.7.
+多态分为两类
+静态多态: 函数重载 和 运算符重载属于静态多态，复用函数名
+动态多态: 派生类和虚函数实现运行时多态
+
+4.7.3 纯虚函数和抽象类
+在多态中，通常父类中虚函数的实现是毫无意义的，主要都是调用子类重写的内容
+
+因此可以将虚函数改为纯虚函数
+
+纯虚函数语法：virtual 返回值类型 函数名 （参数列表）= 0 ;
+
+当类中有了纯虚函数，这个类也称为抽象类
+
+抽象类特点：
+1. 无法实例化对象
+2. 子类必须重写抽象类中的纯虚函数，否则也属于抽象类
