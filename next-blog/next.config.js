@@ -7,12 +7,13 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  **/
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
+  basePath: '/nextblog',
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   eslint: {
     ignoreDuringBuilds: true,
     dirs: ['pages', 'components', 'lib', 'layouts', 'scripts'],
   },
-  experimental: { esmExternals: true, },
+  experimental: { esmExternals: true },
   webpack: (config, { dev, isServer }) => {
     config.module.rules.push({
       test: /\.(png|jpe?g|gif|mp4)$/i,
