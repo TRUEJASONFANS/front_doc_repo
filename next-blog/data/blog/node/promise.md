@@ -1,7 +1,14 @@
+---
+title: Promising sharing
+date: '2021-12-05'
+tags: ['node']
+draft: false
+summary: 'promise sharing'
+---
 # Promise 总结
 
 ## 创建promise
-```
+```js
 let done = true
 
 const isItDoneYet = new Promise((resolve, reject) => {

@@ -1,3 +1,10 @@
+---
+title: Aync/await sharing
+date: '2021-12-05'
+tags: ['node']
+draft: false
+summary: 'aync/await'
+---
 # aync
 
 ## 为什么引入aync/await
