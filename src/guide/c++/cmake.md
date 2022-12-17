@@ -15,5 +15,15 @@
     1. cmake configure
     2. cmake generator
     3. make -j4(并行数量，4线程？, 可加速编译)
-7. 将编译好的opencv build的bin(\build\bin)库加入到系统path路径下 
+7. 将编译好的opencv build的bin(\build\bin)库加入到系统path路
 
+
+## CMake 构建编译一个第三方库
+
+Method 2: Via CMake command line
+Go to the source path (e.g. cd D:\projects\sumo)
+Create a build directory (e.g. mkdir cmake-build && cd cmake-build)
+Run CMake with the correct Visual Studio version (e.g. cmake .. -G "Visual Studio 16 2019 Win64")
+For a list of all possible generators run cmake --help
+Open the solution D:\projects\sumo\cmake-build\SUMO.sln
+Or build from the command line using cmake --build . --config Release
