@@ -6,6 +6,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  * @type {import('next/dist/next-server/server/config').NextConfig}
  **/
 module.exports = withBundleAnalyzer({
+  images: {
+    unoptimized: true,
+  },
   reactStrictMode: true,
   basePath: '/nextblog',
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
@@ -22,7 +25,7 @@ module.exports = withBundleAnalyzer({
           loader: 'file-loader',
           options: {
             publicPath: '/_next',
-            name: 'static/media/[name].[hash].[ext]',
+            name: 'static/[name].[hash].[ext]',
           },
         },
       ],
