@@ -5,12 +5,16 @@ tags: ['node']
 draft: false
 summary: Node介绍part 1
 ---
+## node 简史
+[http://nodejs.cn/learn/a-brief-history-of-nodejs]
+
+## node 的优点
 
 1. runtime: Node js 是一个开源和跨平台的 JavaScript 运行时环境
 2. 性能好:Node.js 在浏览器之外运行 V8 JavaScript 引擎（Google Chrome 的内核）
 3. 单线程管理数千链接，基于事件模型。适用于I/O密集型
 
-```Node
+```js
 const http = require('http')
 
 const hostname = '127.0.0.1'
@@ -27,13 +31,9 @@ server.listen(port, hostname, () => {
 })
 ```
 
-## node 简史
-[http://nodejs.cn/learn/a-brief-history-of-nodejs]
-
-
 ## 安装
-下载node binary, 设置环境变量, 轻量类似于python.
-建议使用nvm管理不同node版本，方便切换不同的node版本
+1. 下载node binary, 设置环境变量, 轻量类似于python.
+2. 建议使用nvm管理不同node版本，方便切换不同的node版本
 
 ## 异步编程
 
@@ -58,6 +58,17 @@ server.listen(port, hostname, () => {
 该环境管理多个并发的事件循环，例如处理 API 调用。 Web 工作进程也运行在自己的事件循环中。
 
 主要需要关心代码会在单个事件循环上运行，并且在编写代码时牢记这一点，以避免阻塞它。
+
+### 堆栈调用
+
+调用堆栈是一个 LIFO 队列（后进先出）。
+
+事件循环不断地检查调用堆栈，以查看是否需要运行任何函数。
+
+当执行时，它会将找到的所有函数调用添加到调用堆栈中，并按顺序执行每个函数。
+
+你知道在调试器或浏览器控制台中可能熟悉的错误堆栈跟踪吗？ 浏览器在调用堆栈中查找函数名称，以告知你是哪个函数发起了当前的调用：
+
 
 ###  阻塞事件循环
 
@@ -94,5 +105,3 @@ const foo = () => {
 
 foo()
 ```
-
-### process.nextTick && setImmediate
