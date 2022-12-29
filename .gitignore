@@ -70,6 +70,7 @@ src/.vuepress/dist/
 docs/front
 docs/blog
 docs/todos
+docs/nextblog
 .DS_Store
 .idea/front_doc_repo.iml
 .idea/misc.xml
