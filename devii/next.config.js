@@ -23,4 +23,5 @@ module.exports = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  basePath: '/nextblog',
 };
