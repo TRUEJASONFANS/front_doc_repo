@@ -1,11 +1,11 @@
 ---
 title: Aync/await sharing
 published: true
-datePublished: 1594425078471
-author: Colin McDonnell
+datePublished: 1672667974000
+author: Zhongwei
 tags:
   - node
-authorPhoto: /img/profile.jpg
+authorPhoto: /img/avatar.jpg
 bannerPhoto: /img/danabramov.png
 thumbnailPhoto: /img/danabramov_thumb.png
 canonicalUrl: https://devii.dev/blog/dan-abramov
@@ -27,7 +27,7 @@ Promise 被引入了用于解决著名的回调地狱问题，但是它们自身
 1. 普通函数加上aync关键字　表示返回一个promise
 2. 即使没有显式地这样做，它也会在内部使它返回 promise。
 
-```js
+```ts
 const aFunction = async () => {
   return '测试'
 }
@@ -36,7 +36,7 @@ aFunction().then(alert) // 这会 alert '测试'
 ```
 
 跟以下代码一样无差别
-```js
+```ts
 const aFunction = () => {
   return Promise.resolve('测试')
 }
@@ -44,26 +44,26 @@ const aFunction = () => {
 aFunction().then(alert) // 这会 alert '测试'
 ```
 3. 代码更容易阅读
-```js
+```ts
 const getFirstUserData = () => {
-  return fetch('/users.json') // 获取用户列表
-    .then(response => response.json()) // 解析 JSON
+  return fetch('/users.tson') // 获取用户列表
+    .then(response => response.tson()) // 解析 tsON
     .then(users => users[0]) // 选择第一个用户
     .then(user => fetch(`/users/${user.name}`)) // 获取用户数据
-    .then(userResponse => userResponse.json()) // 解析 JSON
+    .then(userResponse => userResponse.tson()) // 解析 tsON
 }
 
 getFirstUserData()
 ```
 vs
 
-```js
+```ts
 const getFirstUserData = async () => {
-  const response = await fetch('/users.json') // 获取用户列表
-  const users = await response.json() // 解析 JSON
+  const response = await fetch('/users.tson') // 获取用户列表
+  const users = await response.tson() // 解析 tsON
   const user = users[0] // 选择第一个用户
   const userResponse = await fetch(`/users/${user.name}`) // 获取用户数据
-  const userData = await userResponse.json() // 解析 JSON
+  const userData = await userResponse.tson() // 解析 tsON
   return userData
 }
 
@@ -71,7 +71,7 @@ getFirstUserData()
 ```
 4. 适用于串型模型
 
-```js
+```ts
 const promiseToDoSomething = () => {
   return new Promise(resolve => {
     setTimeout(() => resolve('做些事情'), 10000)
