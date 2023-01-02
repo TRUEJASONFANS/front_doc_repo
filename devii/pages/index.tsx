@@ -46,7 +46,7 @@ const Home = (props: {
         </div>
       </div>
 
-      <div className="section">
+      {/* <div className="section">
         <h2>Testimonials</h2>
         <blockquote>
           <p>
@@ -63,7 +63,7 @@ const Home = (props: {
             </a>
           </p>
         </blockquote>
-      </div>
+      </div> */}
 
       {/* <div className="section">
         <h2>README.md</h2>

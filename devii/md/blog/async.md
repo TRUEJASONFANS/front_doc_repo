@@ -1,13 +1,13 @@
 ---
 title: Aync/await sharing
 published: true
-datePublished: 1672667974000
+datePublished: 1638633600000
 author: Zhongwei
 tags:
   - node
 authorPhoto: /img/avatar.jpg
-bannerPhoto: /img/danabramov.png
-thumbnailPhoto: /img/danabramov_thumb.png
+bannerPhoto: /img/async.png
+thumbnailPhoto: /img/async_thumb.png
 canonicalUrl: https://devii.dev/blog/dan-abramov
 ---
 # aync
