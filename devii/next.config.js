@@ -24,4 +24,7 @@ module.exports = {
     ignoreBuildErrors: true,
   },
   basePath: '/nextblog',
+  publicRuntimeConfig: {
+    basePath: '/nextblog',
+  }
 };

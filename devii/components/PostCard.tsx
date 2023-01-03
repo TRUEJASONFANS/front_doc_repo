@@ -2,11 +2,13 @@ import React from 'react';
 import { format } from 'fecha';
 import { PostData } from '../loader';
 import { Tag } from './Tag';
+import getConfig from 'next/config'
 
 export const PostCard: React.FC<{ post: PostData }> = (props) => {
   const post = props.post;
+  const {publicRuntimeConfig} = getConfig()
   return (
-    <a className="post-card" href={`/${post.path}`}>
+    <a className="post-card" href={`${publicRuntimeConfig.basePath}/${post.path}`}>
       <div className="post-card-inner">
         {post.thumbnailPhoto && (
           <div

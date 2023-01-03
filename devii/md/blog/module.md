@@ -20,7 +20,7 @@ Node应用由模块组成，采用CommonJS模块规范。
 
 CommonJS规范规定，每个模块内部，module变量代表当前模块。这个变量是一个对象，它的exports属性（即module.exports）是对外的接口。加载某个模块，其实是加载该模块的module.exports属性。
 
-``` js
+``` ts
 var x = 5;
 var addX = function (value) {
   return value + x;
@@ -33,22 +33,25 @@ module.exports.addX = addX;
 
 require方法用于加载模块。
 
-
-```js
+```ts
 var example = require('./example.js');
 
 console.log(example.x); // 5
 console.log(example.addX(1)); // 6
 ```
+
 exports 与 module.exports
 优先使用 module.exports
 
 为了方便，Node为每个模块提供一个exports变量，指向module.exports。这等同在每个模块头部，有一行这样的命令
-```js
+
+```ts
 let exports = module.exports;
 ```
+
 不能直接将exports变量指向一个值，因为这样等于切断了exports与module.exports的联系。
-```js
+
+```ts
 let exports = module.exports;
 let appid = '123456'
 // 错误写法
@@ -58,10 +61,11 @@ exports = {
 // 正确写法
 exports.appid = appid
 ```
+
 ## ES6 规范
 
 使用 import , export来导入和导出模块
-```js 
+```ts 
 // utils.js
 export const appid = '123234'
 export function getAppid(){
@@ -76,7 +80,7 @@ console.log(getAppid()) //
 ### export default
 为模块指定默认输出
 
-```js
+```ts
 // utils.js
 // 错误写法 
 // export default const appid = '123456'
@@ -89,7 +93,7 @@ import utils from './utils'
 console.log(utils) // 123456
 ```
 
-```js
+```ts
 import { foo, bar } from ‘./utils’ // 导入多个导出
 import * as utils from ‘utils’ // 作为命名空间导入整个模块
 import utils from ‘utils’ // 导入默认值

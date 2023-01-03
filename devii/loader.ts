@@ -1,6 +1,8 @@
 import matter from 'gray-matter'; //https://www.npmjs.com/package/gray-matter
 import glob from 'glob';
 import { globals } from './globals';
+import getConfig from 'next/config'
+
 
 export type PostData = {
   path: string;
@@ -26,6 +28,18 @@ export const loadMarkdownFile = async (path: string): Promise<RawFile> => {
   return { path, contents: mdFile.default };
 };
 
+const addBasePath = (basePath: string, post: {
+  authorPhoto: string,
+  bannerPhoto: string,
+  thumbnailPhoto: string,
+}): void => {
+  if (basePath.length > 0) {
+    post.authorPhoto = basePath + post.authorPhoto;
+    post.bannerPhoto = basePath + post.bannerPhoto;
+    post.thumbnailPhoto = basePath + post.thumbnailPhoto;
+  }
+}
+
 export const mdToPost = (file: RawFile): PostData => {
   const metadata = matter(file.contents);
   const path = file.path.replace('.md', '');
@@ -45,6 +59,12 @@ export const mdToPost = (file: RawFile): PostData => {
     thumbnailPhoto: metadata.data.thumbnailPhoto || null,
     content: metadata.content,
   };
+  
+  const {publicRuntimeConfig} = getConfig()
+
+  if (publicRuntimeConfig.basePath?.length > 0) {
+    addBasePath(publicRuntimeConfig.basePath, post);
+  }
 
   if (!post.title)
     throw new Error(`Missing required field: title.`);

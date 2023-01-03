@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[My Awesome Blog]]></title><description><![CDATA[I write about code 'n stuff]]></description><link>https://alyssaphacker.com</link><image><url>https://alyssaphacker.com/icon.png</url><title>My Awesome Blog</title><link>https://alyssaphacker.com</link></image><generator>RSS for Node</generator><lastBuildDate>Mon, 02 Jan 2023 15:20:09 GMT</lastBuildDate><atom:link href="https://alyssaphacker.com/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 01 Jan 2022 04:00:00 GMT</pubDate><copyright><![CDATA[2023 truejasonfans]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[wudixiaowushi@163.com]]></managingEditor><webMaster><![CDATA[wudixiaowushi@163.com]]></webMaster><ttl>60</ttl><item><title><![CDATA[module 介绍]]></title><description><![CDATA[<h1 id="">模块化</h1>
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[My Awesome Blog]]></title><description><![CDATA[I write about code 'n stuff]]></description><link>https://alyssaphacker.com</link><image><url>https://alyssaphacker.com/icon.png</url><title>My Awesome Blog</title><link>https://alyssaphacker.com</link></image><generator>RSS for Node</generator><lastBuildDate>Tue, 03 Jan 2023 16:06:39 GMT</lastBuildDate><atom:link href="https://alyssaphacker.com/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Sat, 01 Jan 2022 04:00:00 GMT</pubDate><copyright><![CDATA[2023 truejasonfans]]></copyright><language><![CDATA[en]]></language><managingEditor><![CDATA[wudixiaowushi@163.com]]></managingEditor><webMaster><![CDATA[wudixiaowushi@163.com]]></webMaster><ttl>60</ttl><item><title><![CDATA[module 介绍]]></title><description><![CDATA[<h1 id="">模块化</h1>
 <h2 id="commomjs">CommomJS</h2>
 <p>CommonJS模块规范
 Node应用由模块组成，采用CommonJS模块规范。</p>
 <p>根据这个规范，每个文件就是一个模块，有自己的作用域。在一个文件里面定义的变量、函数、类，都是私有的，对其他文件不可见。</p>
 <p>CommonJS规范规定，每个模块内部，module变量代表当前模块。这个变量是一个对象，它的exports属性（即module.exports）是对外的接口。加载某个模块，其实是加载该模块的module.exports属性。</p>
-<pre><code class="js language-js">var x = 5;
+<pre><code class="ts language-ts">var x = 5;
 var addX = function (value) {
   return value + x;
 };
@@ -13,7 +13,7 @@ module.exports.addX = addX;
 </code></pre>
 <p>上面代码通过module.exports输出变量x和函数addX。</p>
 <p>require方法用于加载模块。</p>
-<pre><code class="js language-js">var example = require('./example.js');
+<pre><code class="ts language-ts">var example = require('./example.js');
 
 console.log(example.x); // 5
 console.log(example.addX(1)); // 6
@@ -21,10 +21,10 @@ console.log(example.addX(1)); // 6
 <p>exports 与 module.exports
 优先使用 module.exports</p>
 <p>为了方便，Node为每个模块提供一个exports变量，指向module.exports。这等同在每个模块头部，有一行这样的命令</p>
-<pre><code class="js language-js">let exports = module.exports;
+<pre><code class="ts language-ts">let exports = module.exports;
 </code></pre>
 <p>不能直接将exports变量指向一个值，因为这样等于切断了exports与module.exports的联系。</p>
-<pre><code class="js language-js">let exports = module.exports;
+<pre><code class="ts language-ts">let exports = module.exports;
 let appid = '123456'
 // 错误写法
 exports = {
@@ -35,7 +35,7 @@ exports.appid = appid
 </code></pre>
 <h2 id="es6">ES6 规范</h2>
 <p>使用 import , export来导入和导出模块
-```js 
+```ts 
 // utils.js
 export const appid = '123234'
 export function getAppid(){
@@ -48,7 +48,7 @@ console.log(getAppid()) //</p>
 <pre><code>### export default
 为模块指定默认输出
 </code></pre>
-<p>js
+<p>ts
 // utils.js
 // 错误写法 
 // export default const appid = '123456'
@@ -60,7 +60,7 @@ import utils from './utils'
 console.log(utils) // 123456</p>
 <pre><code>
 </code></pre>
-<p>js
+<p>ts
 import { foo, bar } from ‘./utils’ // 导入多个导出
 import * as utils from ‘utils’ // 作为命名空间导入整个模块
 import utils from ‘utils’ // 导入默认值
