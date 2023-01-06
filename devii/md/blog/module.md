@@ -6,8 +6,8 @@ author: Zhongwei
 tags:
   - node
 authorPhoto: /img/avatar.jpg
-bannerPhoto: /img/egg.png
-thumbnailPhoto: /img/egg_thumb.png
+bannerPhoto: /img/node_module.webp
+thumbnailPhoto: /img/node_module_thumb.jpg
 canonicalUrl: https://devii.dev/blog/dan-abramov
 ---
 
