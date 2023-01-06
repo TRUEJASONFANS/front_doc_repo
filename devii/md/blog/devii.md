@@ -9,7 +9,7 @@ tags:
   - Blogs
 authorPhoto: /img/profile.jpg
 bannerPhoto: /img/brook.jpg
-thumbnailPhoto: /img/brook.jpg
+thumbnailPhoto: /img/brook_thumb.jpg
 canonicalUrl: https://devii.dev/blog/devii
 ---
 
