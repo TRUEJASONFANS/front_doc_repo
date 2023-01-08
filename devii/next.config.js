@@ -26,5 +26,6 @@ module.exports = {
   basePath: '/nextblog',
   publicRuntimeConfig: {
     basePath: '/nextblog',
-  }
+  },
+  distDir: 'nextblog',
 };

@@ -19,17 +19,25 @@ func BuildApp(cmdStr string, ch chan int, number int) {
 
 func main() {
 	chs := make(chan int)
-	cmd := "yarn build"
-	go BuildApp(cmd, chs, 1)
+
+	cmd1 := "yarn"
+	go BuildApp(cmd1, chs, 1)
 	fmt.Println(<-chs)
 
-	cmd3 := "yarn"
-	go BuildApp(cmd3, chs, 2)
+	cmd2 := "yarn build"
+	go BuildApp(cmd2, chs, 2)
 	fmt.Println(<-chs)
 
+	cmd3 := "cd devii && yarn"
+	go BuildApp(cmd3, chs, 3)
+	fmt.Println(<-chs)
 
-	cmd2 := "cd blog_zhxie && yarn build"
-	go BuildApp(cmd2, chs, 3)
+	cmd4 := "cd devii && yarn export"
+	go BuildApp(cmd4, chs, 4)
+	fmt.Println(<-chs)
+
+	cmd5 := "cd devii && mv nextblog ../docs"
+	go BuildApp(cmd5, chs, 5)
 	fmt.Println(<-chs)
 
 }
