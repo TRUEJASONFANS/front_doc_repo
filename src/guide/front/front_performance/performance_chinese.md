@@ -19,7 +19,7 @@
 
 ## 总的来说，我们将从网络层面和渲染层面两个大的维度来逐个点亮前端性能优化的技能树
 
-![优化flow](./优化flow.png)
+![优化flow](./optimizeflow.png)
 
 对于 DNS 解析和 TCP 连接两个步骤，我们前端可以做的努力非常有限。相比之下，HTTP 连接这一层面的优化才是我们网络优化的核心。因此我们开门见山，抓主要矛盾，直接从 HTTP 开始讲起。
 
@@ -205,7 +205,7 @@ Service Worker 是一种独立于主线程之外的 Javascript 线程。它脱�
 1. Expire
 2. Cache-Control
 
-![强缓存](./强缓存命中.png)
+![强缓存](./strongcache.png)
 expires 允许我们通过绝对的时间戳来控制缓存过期时间，相应地，Cache-Control 中的max-age 字段也允许我们通过设定相对的时间长度来达到同样的目的
 ```js
 expires: Wed, 11 Sep 2019 16:12:18 GMT
@@ -257,4 +257,4 @@ If-None-Match: W/"2a3b-1602480f459"
 
  ### 缓存决策指南
 
- ![cash flow](./cache_flow.png)
+ ![cash flow](./cacheflow.png)

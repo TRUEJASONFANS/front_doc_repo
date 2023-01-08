@@ -19,7 +19,7 @@ For any of our user-side products, we need to take these 5 processes into our ow
 
 **In general, we will light up the skill tree for front-end performance optimization from two major dimensions: the network level and the rendering level**.
 
-![Optimize flow](./优化flow.png)
+![Optimize flow](./optimizeflow.png)
 
 For the two steps of DNS resolution and TCP connection, front-end's impact is very limited. In contrast, the optimization of the HTTP connection level is the core of our network optimization. So we are straight to the point, grasping the main contradiction, and starting directly from HTTP.
 
@@ -205,7 +205,7 @@ Strong cache
 1. Expire
 2. Cache-Control
 
-![强缓存](./强缓存命中.png)
+![强缓存](./strongcache.png)
 Expires allows us to control the cache expiration time through an absolute timestamp. Correspondingly, the max-age field in Cache-Control also allows us to achieve the same goal by setting a relative length of time.
 ```js
 expires: Wed, 11 Sep 2019 16:12:18 GMT
@@ -263,4 +263,4 @@ Etag is more accurate than Last-Modified in sensing file changes and has a highe
 
 ### Caching Decision Guide
 
-![cash flow](./cache_flow.png)
+![cash flow](./cacheflow.png)
