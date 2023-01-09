@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"os"
 )
 
 func BuildApp(cmdStr string, ch chan int, number int) {
@@ -34,9 +35,5 @@ func main() {
 
 	cmd4 := "cd devii && yarn export"
 	go BuildApp(cmd4, chs, 4)
-	fmt.Println(<-chs)
-
-	cmd5 := "cd devii && mv nextblog ../docs"
-	go BuildApp(cmd5, chs, 5)
 	fmt.Println(<-chs)
 }

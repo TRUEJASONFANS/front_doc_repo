@@ -30,7 +30,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next build && next export",
+    "export": "next build && next export -o ../docs/nextblog",
     "deploy": "next build && next export && firebase deploy --only hosting"
   },
   "dependencies": {

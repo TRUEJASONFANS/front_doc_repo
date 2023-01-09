@@ -36,8 +36,4 @@ func main() {
 	go BuildApp(cmd4, chs, 4)
 	fmt.Println(<-chs)
 
-	cmd5 := "cd devii && mv nextblog ../docs"
-	go BuildApp(cmd5, chs, 5)
-	fmt.Println(<-chs)
-
 }
