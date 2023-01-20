@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'fecha';
-import { PostData } from '../loader';
+import { PostData } from '../utils/loader';
 import { Tag } from './Tag';
 import getConfig from 'next/config'
 

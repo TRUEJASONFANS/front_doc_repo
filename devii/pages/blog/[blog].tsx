@@ -1,7 +1,7 @@
 import React from 'react';
 import glob from 'glob';
 import { BlogPost } from '../../components/BlogPost';
-import { loadPost } from '../../loader';
+import { loadPost } from '../../utils/loader';
 
 function Post(props: any) {
   const { post } = props;

@@ -1,6 +1,6 @@
 import matter from 'gray-matter'; //https://www.npmjs.com/package/gray-matter
 import glob from 'glob';
-import { globals } from './globals';
+import { globals } from '../globals';
 import getConfig from 'next/config'
 
 
@@ -12,7 +12,7 @@ export type PostData = {
   description?: string;
   canonicalUrl?: string;
   published: boolean;
-  datePublished: number;
+  datePublished: string;
   author?: string;
   authorPhoto?: string;
   authorTwitter?: string;
@@ -24,7 +24,7 @@ export type PostData = {
 type RawFile = { path: string; contents: string };
 
 export const loadMarkdownFile = async (path: string): Promise<RawFile> => {
-  const mdFile = await import(`./md/${path}`);
+  const mdFile = await import(`../md/${path}`);
   return { path, contents: mdFile.default };
 };
 

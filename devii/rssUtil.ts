@@ -2,7 +2,7 @@ import RSS from 'rss';
 import fs from 'fs';
 import showdown from 'showdown';
 import { globals } from './globals';
-import { PostData } from './loader';
+import { PostData } from './utils/loader';
 
 export const generateRSS = async (posts: PostData[]) => {
   posts.map((post) => {
