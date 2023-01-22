@@ -9,6 +9,10 @@ module.exports = {
       ...config.resolve.alias,
       '~': __dirname,
     };
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    })
     return config;
   },
   eslint: {

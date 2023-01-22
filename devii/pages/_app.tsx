@@ -4,9 +4,13 @@ import { Footer } from '../components/Footer';
 import { globals } from '../globals';
 import { Header } from '../components/Header';
 import '../styles/base.css';
+import LayoutWrapper from '../components/LayoutWrapper';
+import { ThemeProvider } from 'next-themes';
+
 
 const App: React.FC = ({ Component, pageProps }: any) => {
   return (
+    <ThemeProvider attribute="class">
     <div className="container">
       <Head>
         {globals.googleAnalyticsId && (
@@ -25,9 +29,12 @@ const App: React.FC = ({ Component, pageProps }: any) => {
         )}
       </Head>
       <Header />
-      <Component {...pageProps} />
+      <LayoutWrapper>
+        <Component {...pageProps} />
+      </LayoutWrapper>
       <Footer />
     </div>
+    </ThemeProvider>
   );
 };
 

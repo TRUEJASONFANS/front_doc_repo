@@ -24,7 +24,15 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "incremental": true
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/data/*": ["data/*"],
+      "@/layouts/*": ["layouts/*"],
+      "@/lib/*": ["lib/*"],
+      "@/css/*": ["css/*"]
+    }
   },
   "exclude": [
     "node_modules"
@@ -34,5 +42,6 @@
     "**/*.ts",
     "**/*.tsx",
     "next.config.js"
-  ]
+  ],
+
 }
