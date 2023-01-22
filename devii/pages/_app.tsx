@@ -6,7 +6,8 @@ import { Header } from '../components/Header';
 import '../styles/base.css';
 import LayoutWrapper from '../components/LayoutWrapper';
 import { ThemeProvider } from 'next-themes';
-
+import '@/css/tailwind.css'
+import '@/css/prism.css'
 
 const App: React.FC = ({ Component, pageProps }: any) => {
   return (
