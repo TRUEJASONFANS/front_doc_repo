@@ -6,7 +6,7 @@ import { PostCard } from '../components/PostCard';
 import Link from 'next/link';
 import formatDate from '../utils/formatDate';
 
-const MAX_DISPLAY = 5
+const MAX_DISPLAY = 4
 
 const Home = (props: {
   introduction: string;
@@ -46,7 +46,7 @@ const Home = (props: {
                         <div>
                           <h2 className="text-2xl font-bold leading-8 tracking-tight">
                             <Link
-                              href={`/nextblog/blog/${path}`}
+                              href={`/${path}`}
                               className="text-gray-900 dark:text-gray-100"
                             >
                               {title}
@@ -64,7 +64,7 @@ const Home = (props: {
                       </div>
                       <div className="text-base font-medium leading-6">
                         <Link
-                          href={`/nextblog/blog/${path}`}
+                          href={`/${path}`}
                           className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           aria-label={`Read "${title}"`}
                         >

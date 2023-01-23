@@ -101,7 +101,4 @@ import utils , { foo , bar } from ‘./utils’ // 导入多个导出与默认�
 import { foo , bar } , * as utils from ‘utils’ // 导入命名空间整个模块与多个导出
 import(’./utils’).then (res) => { // do something} // import动态导入函数，当使用它的时候，会返回一个promise。
 let module = await import(’./utils’) // 支持await关键字
-————————————————
-版权声明：本文为CSDN博主「前端小小白zyw」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/Vue2018/article/details/85787759
 ```

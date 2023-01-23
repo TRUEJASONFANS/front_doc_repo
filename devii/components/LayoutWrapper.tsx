@@ -6,6 +6,7 @@ import MobileNav from './MobileNav'
 import ThemeSwitch from './ThemeSwitch'
 import { ReactNode } from 'react'
 import Link from 'next/link'
+import Footer from '@/components/Footer'
 
 interface Props {
   children: ReactNode
@@ -49,6 +50,7 @@ const LayoutWrapper = ({ children }: Props) => {
           </div>
         </header>
         <main className="mb-auto">{children}</main>
+        <Footer/>
       </div>
     </SectionContainer>
   )
