@@ -32,3 +32,6 @@ firebase.json
 .firebase/*
 .nvmrc
 .vscode
+
+
+/public/rss.xml
